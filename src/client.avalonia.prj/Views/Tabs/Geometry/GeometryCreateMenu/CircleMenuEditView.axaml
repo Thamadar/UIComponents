@@ -1,0 +1,94 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              
+             xmlns:local="using:Client.Avalonia.Views"
+             xmlns:uic="using:Lib.Avalonia.Controls"
+             xmlns:uiconv="using:Lib.Avalonia.Converters"
+             xmlns:shapes="using:Client.Avalonia.Views.Geometry.Shapes"
+             x:DataType="local:CircleMenuEditViewModel"
+             
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="100"
+             x:Class="Client.Avalonia.Views.CircleMenuEditView">
+
+    <Design.DataContext>
+        <local:CircleMenuEditViewModel />
+    </Design.DataContext>
+   
+    <StackPanel 
+    Orientation="Horizontal"
+    Spacing="8">
+
+        <StackPanel Orientation="Vertical" > 
+            <TextBlock Classes="default menu"
+                               Text="Заливка:"/>
+
+            <uic:RectangleColorPickerControl
+            Margin="-3,0,0,0"
+            HorizontalAlignment="Center"
+            SelectedBrush="{Binding Fill}" />
+
+        </StackPanel>
+        
+        <StackPanel Orientation="Vertical" >
+        
+            <TextBlock
+            Classes="default menu"
+            Text="Обводка:"/>
+        
+            <uic:RectangleColorPickerControl
+            Margin="-3,0,0,0"
+            HorizontalAlignment="Center"
+            SelectedBrush="{Binding BorderBrush}" />
+        </StackPanel>
+            
+        <StackPanel Orientation="Vertical" >
+        <!-- TO DO: TextBox в значение ещё добавить -->
+            <TextBlock Classes="default menu">
+                <Run Text="Контур:"/>
+                <Run Text="{Binding BorderThickness, StringFormat={}{0:0}}"/>
+            </TextBlock>
+
+            <Slider Value="{Binding BorderThickness}"
+                    Width="150"
+                    TickFrequency="1"   
+                    IsSnapToTickEnabled="True"
+                    Margin="0,-14,0,0"
+                    HorizontalAlignment="Left"
+                    Minimum="0" Maximum="50" />
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" >
+        <!-- TO DO: TextBox в значение ещё добавить -->
+            <TextBlock Classes="default menu">
+                <Run Text="Непрозрачность:"/>
+                <Run Text="{Binding Opacity, StringFormat={}{0:P0}}"/>
+            </TextBlock>
+
+            <Slider Value="{Binding Opacity}"
+                    Width="150"
+                    TickFrequency="0.05"
+                    IsSnapToTickEnabled="True"
+                    Margin="0,-14,0,0"
+                    HorizontalAlignment="Left"
+                    Minimum="0" Maximum="1" />
+        </StackPanel> 
+
+        <StackPanel Orientation="Vertical">
+        <!-- TO DO: TextBox в значение ещё добавить -->
+            <TextBlock Classes="default menu">
+                <Run Text="Радиус:"/>
+                <Run Text="{Binding Radius, StringFormat={}{0:0}}"/>
+            </TextBlock>
+
+            <Slider Value="{Binding Radius}"
+                    Width="150"
+                    TickFrequency="1"
+                    IsSnapToTickEnabled="True"
+                    Margin="0,-14,0,0"
+                    HorizontalAlignment="Left"
+                    Minimum="1" Maximum="100" />
+        </StackPanel>  
+    </StackPanel> 
+</UserControl>

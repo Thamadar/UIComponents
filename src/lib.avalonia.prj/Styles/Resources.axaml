@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+    <FontFamily x:Key="DefaultFontFamily">SegouUI</FontFamily>
+
+    <x:Double
+    x:Key="SmallFontSize">
+        12
+    </x:Double>
+
+    <x:Double
+    x:Key="NormalFontSize">
+        14
+    </x:Double>
+
+    <x:Double
+    x:Key="MediumFontSize">
+        18
+    </x:Double>
+
+    <DrawingBrush
+    x:Key="ChessboardBrush" 
+    TileMode="Tile"
+    Stretch="None"
+    DestinationRect="0 0 20 20">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <!-- Белые клетки -->
+                <GeometryDrawing Brush="White">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,0,10,10"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="White">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="10,10,10,10"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+
+                <!-- Серые клетки -->
+                <GeometryDrawing Brush="LightGray">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="10,0,10,10"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="LightGray">
+                    <GeometryDrawing.Geometry>
+                        <RectangleGeometry Rect="0,10,10,10"/>
+                    </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush> 
+
+</ResourceDictionary>

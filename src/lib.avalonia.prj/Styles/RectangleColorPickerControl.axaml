@@ -1,0 +1,86 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:uic="using:Lib.Avalonia.Controls">
+  <Design.PreviewWith>
+    <Border Padding="20">
+    <uic:RectangleColorPickerControl/>
+    </Border>
+  </Design.PreviewWith>
+
+
+    <Style Selector="uic|RectangleColorPickerControl">
+        <Setter Property="CornerRadius"   Value="4"/>
+        <Setter Property="WidthButton"    Value="24"/>
+        <Setter Property="HeightButton"   Value="24"/>
+        <Setter Property="SpacingBrushes" Value="4"/>
+        <Setter Property="IsAvaivableOpenPopup" Value="True"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Grid>
+                    <Border x:Name="PART_MainBorder" 
+                            CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                    <Popup x:Name="PART_Popup"
+                           PlacementTarget="{Binding #PART_MainBorder}"
+                           MaxWidth="200"
+                           MaxHeight="200"
+                           IsLightDismissEnabled="False">
+                           <Border Background="White"
+                                   BorderBrush="Gray"
+                                   BorderThickness="1"
+                                   Padding="5">
+                               <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                                             VerticalScrollBarVisibility="Auto">
+                                             <ItemsControl x:Name="PART_ItemsControl"
+                                                           DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}" >
+                                                 <ItemsControl.Styles>
+                                                 <Style Selector="Button /template/ ContentPresenter#PART_ContentPresenter">
+                                                     <Style Selector="^:pointerover">
+                                                         <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Self}}"/>
+                                                     </Style>
+                                                     <Style Selector="^:pressed">
+                                                         <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource Self}}"/>
+                                                     </Style>
+                                                 </Style>
+                                                 </ItemsControl.Styles>
+                                                 <ItemsControl.ItemsPanel>
+                                                     <ItemsPanelTemplate>
+                                                         <WrapPanel Orientation="Horizontal"
+                                                                    ItemSpacing="{Binding #PART_ItemsControl.DataContext.SpacingBrushes}"/>
+                                                     </ItemsPanelTemplate>
+                                                 </ItemsControl.ItemsPanel>
+                                                 <ItemsControl.ItemTemplate>
+                                                     <DataTemplate>
+                                                         <Button Width="24"
+                                                                 Height="24"
+                                                                 Padding="0"
+                                                                 CornerRadius="{Binding #PART_ItemsControl.DataContext.CornerRadius}"
+                                                                 Margin="0"
+                                                                 Background="{Binding}"
+                                                                 BorderThickness="0"
+                                                                 CommandParameter="{Binding}"
+                                                                 Command="{Binding #PART_ItemsControl.DataContext.PickColorCommand}"/>
+                                                 </DataTemplate>
+                                                 </ItemsControl.ItemTemplate>
+                                             </ItemsControl>
+                               </ScrollViewer>
+                           </Border>
+                    </Popup>
+                </Grid>
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^ /template/ Border#PART_MainBorder">
+                <Setter Property="Width" Value="20"/>
+                <Setter Property="Height" Value="20"/>
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBlue}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style Selector="^[IsAvaivableOpenPopup=True] /template/ Border#PART_MainBorder">
+            <Style Selector=" ^:pointerover">
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+        </Style>
+    </Style>
+</Styles>

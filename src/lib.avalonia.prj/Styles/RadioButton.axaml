@@ -1,0 +1,97 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border Padding="20">
+    <StackPanel
+    Grid.Row="0"
+    Margin="16,0"
+    Orientation="Horizontal"
+    Height="32"
+    Spacing="4">
+        <RadioButton
+        Classes="default"
+        Content="Прямоугольник" 
+        GroupName="Shapes"/>
+        <RadioButton
+        Classes="default"
+        Content="Окружность" 
+        GroupName="Shapes"/>
+        </StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+    <Style Selector="RadioButton">
+         <Setter Property="Cursor" Value="Hand"/>
+
+        <Style Selector="^:checked">
+            <Setter Property="Cursor" Value="Arrow"/> 
+            <Setter Property="IsHitTestVisible" Value="False"/> 
+        </Style>
+
+        <Style Selector="^:pointerover:not(:checked)">
+            <Setter Property="Cursor" Value="Hand"/> 
+            <Style Selector="^:pressed">
+                <Setter Property="Cursor" Value="Hand"/> 
+            </Style>
+        </Style> 
+   </Style>
+
+
+    <Style Selector="RadioButton.default"> 
+        <Setter Property="FontWeight" Value="SemiLight"/>
+        <Setter Property="Padding"    Value="16,2,16,3"/>
+        <Setter Property="Background" Value="transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryBlue}"/>
+        <Setter Property="Margin"     Value="0 0 0 0" />
+        <Setter Property="Foreground" Value="#52585a" />
+        <Setter Property="CornerRadius"     Value="4" />
+        <Setter Property="HorizontalContentAlignment"     Value="Center" />
+        <Setter Property="BorderThickness"     Value="1" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <ContentPresenter
+                Name="PART_ContentPresenter"
+                Height="24"
+                MinWidth="140"
+                Foreground="{TemplateBinding Foreground}"
+                Margin="{TemplateBinding Margin}"
+                Padding="{TemplateBinding Padding}"
+                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalContentAlignment="Center"
+                Content="{TemplateBinding Content}" 
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}" />
+            </ControlTemplate>
+        </Setter>
+
+         <Style Selector="^ > TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/> 
+        </Style>
+
+        <Style Selector="^:checked">
+            <Setter Property="Cursor" Value="Arrow"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryBlue}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBlue}"/>
+            <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+        </Style>
+
+        <Style Selector="^:pointerover:not(:checked)">
+            <Setter Property="Background" Value="#d2e6f4"/>
+            <Setter Property="BorderBrush" Value="#d2e6f4"/>
+            
+            <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Foreground" Value="Black" />
+            </Style>
+            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Foreground" Value="Black" />
+            </Style> 
+        </Style>
+    </Style>
+</Styles>

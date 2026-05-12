@@ -1,0 +1,78 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             
+             xmlns:local="using:Client.Avalonia.Views"
+             xmlns:uic="using:Lib.Avalonia.Controls"
+             xmlns:uiconv="using:Lib.Avalonia.Converters"
+             xmlns:shapes="using:Client.Avalonia.Views.Geometry.Shapes"
+             x:DataType="local:GeometryCreateMenuViewModel"
+             
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="100"
+             x:Class="Client.Avalonia.Views.GeometryCreateMenuView">
+
+    <Design.DataContext>
+        <local:GeometryCreateMenuViewModel />
+    </Design.DataContext>
+
+    <UserControl.Resources>
+     
+    <ControlTemplate x:Key="ShapeCreateRect">
+        <local:RectMenuEditView />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ShapeCreateCircle">
+        <local:CircleMenuEditView />
+    </ControlTemplate>
+
+    <uiconv:SwitchConverter
+    x:Key="ShapeEditMenuConverter">
+        <uiconv:Case
+        Key = "{x:Static local:ShapeCreateEnum.Rect}"
+        Value="{StaticResource ShapeCreateRect}"/>
+        <uiconv:Case
+        Key = "{x:Static local:ShapeCreateEnum.Circle}"
+        Value="{StaticResource ShapeCreateCircle}"/>
+    </uiconv:SwitchConverter> 
+
+    </UserControl.Resources>
+
+    <Grid 
+    RowDefinitions="auto,*">
+
+    <Grid
+        Grid.Row="0" > 
+        <StackPanel 
+        Margin="8,0"
+        Orientation="Horizontal"
+        Height="32"
+        Spacing="4">
+
+        <!-- TO DO: впихнуть иконки. -->
+            <RadioButton
+            Classes="default"
+            Content="Прямоугольник"
+            IsChecked="{Binding SelectedShapeCreate,
+            Converter={x:Static uiconv:EnumToBooleanConverter.Instance},
+            ConverterParameter={x:Static local:ShapeCreateEnum.Rect},
+            Mode=TwoWay}"
+            GroupName="Shapes"/>
+            <RadioButton
+            Classes="default"
+            Content="Окружность"
+            IsChecked="{Binding SelectedShapeCreate,
+            Converter={x:Static uiconv:EnumToBooleanConverter.Instance},
+            ConverterParameter={x:Static local:ShapeCreateEnum.Circle},
+            Mode=TwoWay}"
+            GroupName="Shapes"/>
+        </StackPanel> 
+    </Grid> 
+
+    <ContentControl
+        Grid.Row="1"
+        Margin="16,0" 
+        Content="{Binding CurrentShapeCreaterVM}"/>
+
+    </Grid> 
+</UserControl>

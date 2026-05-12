@@ -1,0 +1,33 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude
+                Source="avares://lib.avalonia/Styles/Resources.axaml" />
+                <ResourceInclude
+                Source="avares://lib.avalonia/Styles/Colors.axaml" />
+                <ResourceInclude
+                Source="avares://lib.avalonia/Resources/Icons/GlobalIcons.axaml" />
+               
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources> 
+
+    <StyleInclude
+            Source="avares://lib.avalonia/Styles/RectangleColorPickerControl.axaml" />
+    <StyleInclude
+            Source="avares://lib.avalonia/Styles/Slider.axaml" />
+    <StyleInclude
+            Source="avares://lib.avalonia/Styles/TextBlock.axaml" />
+    <StyleInclude
+            Source="avares://lib.avalonia/Styles/Button.axaml" />
+    <StyleInclude
+            Source="avares://lib.avalonia/Styles/ToggleButton.axaml" />
+    <StyleInclude
+            Source="avares://lib.avalonia/Styles/RadioButton.axaml" />
+    <StyleInclude
+            Source="avares://lib.avalonia/Styles/Canvas.axaml" />
+
+</Styles>

@@ -1,0 +1,70 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Xaml.Behaviors.Interactivity"
+             xmlns:behaviors="using:Client.Avalonia.Behaviors"
+             xmlns:local="using:Client.Avalonia.Views"
+             xmlns:uic="using:Lib.Avalonia.Controls"
+             xmlns:shapes="using:Client.Avalonia.Views.Geometry.Shapes"
+             x:DataType="local:DisplayViewModel"
+
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Client.Avalonia.Views.DisplayView">
+
+    <Design.DataContext>
+        <local:DisplayViewModel />
+    </Design.DataContext>
+
+    <ScrollViewer
+    HorizontalScrollBarVisibility="Auto"
+    VerticalScrollBarVisibility="Auto"> 
+        <ItemsControl 
+        ItemsSource="{Binding TotalShapes}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas
+                    Classes="graphic"
+                    Width="1500" Height="720">
+                      <i:Interaction.Behaviors>
+                        <behaviors:CanvasHitTestBehavior 
+                        IsHitTestEnabled="True"
+                        CreateCommand="{Binding CreateShapeCommand}"/> 
+                      </i:Interaction.Behaviors>
+                    </Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.Styles>
+                <Style Selector="ContentPresenter"
+                       x:DataType="shapes:IShapeItem">
+                    <Setter Property="Canvas.Left" Value="{Binding XCenter}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding YCenter}"/>
+                </Style>
+            </ItemsControl.Styles>
+            <ItemsControl.DataTemplates>
+                <!-- Окружность -->
+                <DataTemplate
+                DataType="{x:Type shapes:ICircleItem}">
+                    <uic:CircleControl
+                    IsSelected="{Binding IsSelected}" 
+                    Radius="{Binding Radius}"
+                    Fill="{Binding Fill}"
+                    BorderBrush="{Binding BorderBrush}"
+                    BorderThickness="{Binding BorderThickness}"/>
+                </DataTemplate>
+
+                <!-- Окружность -->
+                <DataTemplate
+                DataType="{x:Type shapes:IRectItem}">
+                    <uic:RectControl 
+                    IsSelected="{Binding IsSelected}" 
+                    Width="{Binding Width}"
+                    Height="{Binding Height}"
+                    Fill="{Binding Fill}"
+                    BorderBrush="{Binding BorderBrush}"
+                    BorderThickness="{Binding BorderThickness}"/>
+                </DataTemplate>
+            </ItemsControl.DataTemplates>
+        </ItemsControl> 
+    </ScrollViewer> 
+</UserControl>
