@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using Client.Avalonia.Services;
+using Client.Avalonia.Services.Interfaces;
 using Client.Avalonia.Views.Geometry.Shapes;
 using DynamicData;
 using Lib.Avalonia;

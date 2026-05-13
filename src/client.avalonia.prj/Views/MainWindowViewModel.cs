@@ -16,15 +16,11 @@ namespace Client.Avalonia.Views
         /// <summary>
         /// Горячие клавиши окна.
         /// </summary>
-        public ObservableCollection<IHotKey> HotKeys { get; }
-
-        public GeometryViewModel GeometryViewModel { get; }
+        public ObservableCollection<IHotKey> HotKeys { get; } 
 
         public MainWindowViewModel()
         {
-            HotKeys = new ObservableCollection<IHotKey>();
-
-            GeometryViewModel = new GeometryViewModel();
+            HotKeys = new ObservableCollection<IHotKey>(); 
 
             LoadHotKeys();
         }
@@ -37,7 +33,7 @@ namespace Client.Avalonia.Views
         {
             HotKeys.Clear();
 
-            HotKeys.AddRange(GeometryViewModel.GetHotKeys());
+            //HotKeys.AddRange(GeometryViewModel.GetHotKeys());
         }
     }
 }
