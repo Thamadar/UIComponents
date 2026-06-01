@@ -19,5 +19,4 @@
 
 ![](https://github.com/Thamadar/UICompontents/blob/main/preview.gif) <br>
 Старая версия. Присутствует на WPF.
-P.S. горячая клавиша удаления элемента во вкладке Граф. - Delete.
 
