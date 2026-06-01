@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Client.Avalonia.Helpers;
 using Lib.Avalonia;
 using Lib.Avalonia.Extensions;
 using Lib.Avalonia.Helpers;
@@ -8,7 +9,7 @@ using System.Diagnostics;
 
 namespace Client.Avalonia.Views.Geometry
 {
-    public class GeometryManagementPanelViewModel : ViewModelBase
+    public sealed partial class GeometryManagementPanelViewModel : ViewModelBase
     {
         /// <summary>
         /// Список меню управления.
@@ -23,28 +24,21 @@ namespace Client.Avalonia.Views.Geometry
         }
          
         private void LoadMenuItems()
-        { 
-            var userIcon     = Application.Current?.GetTemplateResource("TestIcon");
-            var settingsIcon = Application.Current?.GetTemplateResource("TestIcon");
-            var fileIcon     = Application.Current?.GetTemplateResource("TestIcon");
-                
+        {   
             var fileChilds = new List<MenuDataItem>
             {
                 new MenuDataItem(
-                text: "Новый...",
-                icon: fileIcon,
-                command: ReactiveCommand.Create(() => Debug.WriteLine("Новый файл")),
+                text: "Новый...", 
+                command: Commands.NewFileCommand,
                 key: "Ctrl+N"),
 
                 new MenuDataItem(
-                text: "Открыть...",
-                icon: fileIcon,
-                command: ReactiveCommand.Create(() => Debug.WriteLine("Открыть файл")),
+                text: "Открыть...", 
+                command: Commands.OpenFileCommand,
                 key: "Ctrl+O"),
                  
                 new MenuDataItem(
-                text: "Последние файлы",
-                icon: fileIcon,
+                text: "Последние файлы", 
                 childs: new List<MenuDataItem>()
                 {
                      new MenuDataItem(
@@ -63,8 +57,8 @@ namespace Client.Avalonia.Views.Geometry
                         text: "4 Project4.PSD",
                         command: ReactiveCommand.Create(() => Debug.WriteLine("Project4.PSD"))),
                             new MenuDataItem(
-                        text: "5 Project5.PSD",
-                        command: ReactiveCommand.Create(() => Debug.WriteLine("Project5.PSD"))),
+                        text: "5 Project55555555_5555555555_5555555555.PSD",
+                        command: ReactiveCommand.Create(() => Debug.WriteLine("Project5555555_5555555555_5555555555.PSD"))),
                               new MenuDataItem(
                         text: "6 Project6.PSD",
                         command: ReactiveCommand.Create(() => Debug.WriteLine("Project6.PSD"))),
@@ -74,15 +68,15 @@ namespace Client.Avalonia.Views.Geometry
 
                 new MenuDataItem(
                 text: "Сохранить...",
-                icon: fileIcon,
-                command: ReactiveCommand.Create(() => Debug.WriteLine("SAVE")),
+                icon: Application.Current?.GetTemplateResource("SaveIcon"),
+                command: Commands.SaveFileCommand,
                 key: "Ctrl+S"),
 
                 new MenuDataItem(isSeparator:true),
 
                 new MenuDataItem(
                 text: "Выход", 
-                command: ReactiveCommand.Create(() => Debug.WriteLine("Выход")))
+                command: Commands.CloseFileCommand)
             };  
             var fileMenu = new MenuDataItem(
                 text: "Файл",
@@ -92,36 +86,35 @@ namespace Client.Avalonia.Views.Geometry
             { 
                 new MenuDataItem(
                 text: "Отменить",
-                icon: fileIcon,
+                icon: Application.Current?.GetTemplateResource("UndoIcon"),
                 key: "Ctrl+Z",
-                command: ReactiveCommand.Create(() => Debug.WriteLine("Отменить"))),
+                command: Commands.StepBackEditCommand),
 
                 new MenuDataItem(
                 text: "Вернуть",
-                icon: fileIcon,
+                icon: Application.Current?.GetTemplateResource("RedoIcon"),
                 key: "Ctrl+Y",
-                command: ReactiveCommand.Create(() => Debug.WriteLine("Вернуть"))),
+                command: Commands.StepForwardEditCommand),
 
                 new MenuDataItem(isSeparator:true),
 
                 new MenuDataItem(
-                text: "Клонировать",
-                icon: fileIcon,
+                text: "Дублировать",
+                icon: Application.Current?.GetTemplateResource("DuplicateIcon"),
                 key: "Ctrl+J",
-                command: ReactiveCommand.Create(() => Debug.WriteLine("Клонировать")))
+                command: Commands.CloneEditCommand)
             }; 
             var editMenu = new MenuDataItem(
-                text: "Редактировать",
-                icon: fileIcon,
+                text: "Редактировать", 
                 childs: editChilds);
 
             var aboutMenu = new MenuDataItem(
                 text: "Справка",
-                command: ReactiveCommand.Create(() => Debug.WriteLine("Справка")));
+                command: Commands.ManualOpenCommand);
 
             MenuItems.Add(fileMenu);
             MenuItems.Add(editMenu);
             MenuItems.Add(aboutMenu);
-        }
+        } 
     }
 }

@@ -1,0 +1,33 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Lib.Avalonia.Controls">
+    <Design.PreviewWith>
+        <Border
+            Width="200" Height="200"
+            Padding="20">
+            <c:DialogDarkControl
+                IsActive="True" />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="c|DialogDarkControl">
+        <Setter Property="IsVisible" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Opacity="{TemplateBinding Opacity}" />
+            </ControlTemplate>
+        </Setter>
+
+        <Style Selector="^[IsActive=True]">
+            <Setter Property="Opacity" Value="0.8" />
+            <Setter Property="IsVisible" Value="True" />
+            <Setter Property="Background" Value="{DynamicResource DialogDarkControlBackground}" />
+        </Style>
+    </Style>
+</Styles>

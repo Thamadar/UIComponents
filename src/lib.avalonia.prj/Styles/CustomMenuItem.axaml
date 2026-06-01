@@ -26,43 +26,51 @@
                         Padding="{TemplateBinding Padding}"> 
                             <Panel> 
                                 <!-- Сепаратор -->
-                                <Separator
+                                <Separator 
                                 Classes="default menu"
                                 IsVisible="{Binding IsSeparator, RelativeSource={RelativeSource TemplatedParent}}" 
                                 Margin="4,4"/>
                                 
                                 <!-- Контент пункта меню -->
-                                <Grid ColumnDefinitions="Auto,*,Auto"
+                                <Grid ColumnDefinitions="32,*,20"
                                       IsVisible="{Binding !IsSeparator, RelativeSource={RelativeSource TemplatedParent}}">
                                     
                                     <!-- Иконка -->
-                                    <ContentControl Grid.Column="0"
+                                    <ContentControl
+                                    Grid.Column="0"
+                                    ClipToBounds="False"
                                                     IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
                                                     Content="{TemplateBinding Icon}"
                                                     Template="{TemplateBinding Icon}"
-                                                    VerticalAlignment="Center"
-                                                    Margin="0,0,12,0"
-                                                    Width="20"
-                                                    Height="20"/>
+                                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                    Width="16"
+                                                    Height="16"/>
                                                     
                                     <Grid 
+                                    x:Name="PART_TextContainerGrid"
                                     Grid.Column="1"
                                     ColumnDefinitions="*, 50">            
                                         <!-- Текст -->
                                         <TextBlock Grid.Column="0"
                                                    Text="{TemplateBinding Text}"
-                                                   VerticalAlignment="Center"
-                                                   FontSize="14" />
+                                                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   ToolTip.Tip="{TemplateBinding Text}"
+                                                   FontSize="{TemplateBinding FontSize}" />
 
-                                        <!-- Текст -->
+                                        <!-- Горячие клавиши -->
                                         <TextBlock Grid.Column="1"
                                                    Text="{TemplateBinding Key}"
-                                                   VerticalAlignment="Center"
-                                                   FontSize="14" />
+                                                   TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   ToolTip.Tip="{TemplateBinding Key}"
+                                                   FontSize="{TemplateBinding FontSize}" />
                                     </Grid>
                                     
                                     <!-- Стрелка для вложенного меню. Переделать-->
-                                    <Path Grid.Column="2"
+                                    <Path
+                                    x:Name="PART_ArrowPath"
+                                    Grid.Column="2"
                                           IsVisible="{Binding Items.Count, RelativeSource={RelativeSource TemplatedParent}}"
                                           Data="M0,0 L4,4 L8,0 Z"
                                           Fill="#787878"
@@ -70,8 +78,7 @@
                                           Height="4"
                                           HorizontalAlignment="Center"
                                           VerticalAlignment="Center"
-                                          Margin="8,0,0,0" 
-                                          RenderTransformOrigin="0.5,0.5"/>
+                                          Margin="2,0"  />
                                 </Grid>
                             </Panel>
                         </Border>
@@ -84,8 +91,7 @@
                                 TreeModeClose="False" 
                                 MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
                                 Placement="Right"
-                                HorizontalOffset="-4"
-                                IsVisible="{Binding Items.Count, RelativeSource={RelativeSource TemplatedParent}}"> 
+                                HorizontalOffset="-4" > 
                             <Border Background="{StaticResource PrimaryGray}"
                                     BorderBrush="#787878"
                                     BorderThickness="1"
@@ -94,15 +100,19 @@
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                                               VerticalScrollBarVisibility="Auto">
                                     <ItemsControl 
+                                    x:Name="ItemsControl"
                                     ItemsSource="{Binding Childs}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
                                                 <controls:CustomMenuItem
                                                 x:DataType="helpers:IMenuDataItem" 
+                                                ColumnDefinitions="{Binding #ItemsControl.DataContext.ChildsColumnDefinitions}"
+                                                MaxTextWidth="{Binding #ItemsControl.DataContext.MaxTextWidth}"
                                                 Icon="{Binding Icon}"
                                                 Key="{Binding Key}"
                                                 Text="{Binding Text}" 
                                                 Items="{Binding Childs}"
+                                                Command="{Binding Command}"
                                                 IsSeparator="{Binding IsSeparator}"
                                                 Padding="12,8"
                                                 Background="Transparent"/>
@@ -121,8 +131,18 @@
             <Setter Property="Background"  Value="{StaticResource PrimaryDark}"/> 
         </Style>
          
+        <Style Selector="^ /template/ Path#PART_ArrowPath">
+             <Setter Property="RenderTransform">
+                <RotateTransform Angle="-90"/>
+            </Setter>
+        </Style>
+
         <Style Selector="^[IsSubMenuOpen=True]">
             <Setter Property="Background"  Value="{StaticResource PrimaryDark}"/> 
+        </Style>
+         
+        <Style Selector="^[IsSeparator=True]">
+            <Setter Property="IsHitTestVisible"  Value="False"/> 
         </Style>
   </Style>
 </Styles>

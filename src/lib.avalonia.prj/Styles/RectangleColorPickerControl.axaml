@@ -20,14 +20,16 @@
                     <Border x:Name="PART_MainBorder" 
                             CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource TemplatedParent}}" />
 
-                    <Popup x:Name="PART_Popup"
+                    <uic:PopupControl
+                    x:Name="PART_Popup"
                            PlacementTarget="{Binding #PART_MainBorder}"
                            MaxWidth="200"
                            MaxHeight="200"
                            IsLightDismissEnabled="False">
-                           <Border Background="White"
-                                   BorderBrush="Gray"
+                           <Border Background="{StaticResource PrimaryGray}"
+                                    BorderBrush="#787878"
                                    BorderThickness="1"
+                                    CornerRadius="6"
                                    Padding="5">
                                <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                                              VerticalScrollBarVisibility="Auto">
@@ -65,7 +67,7 @@
                                              </ItemsControl>
                                </ScrollViewer>
                            </Border>
-                    </Popup>
+                    </uic:PopupControl>
                 </Grid>
             </ControlTemplate>
         </Setter>

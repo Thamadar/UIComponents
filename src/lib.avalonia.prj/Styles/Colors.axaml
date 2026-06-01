@@ -8,12 +8,20 @@
     <Color x:Key="PrimaryGrayColor">#383838</Color>
     <Color x:Key="PrimaryGrayLightColor">#454545</Color>
     <Color x:Key="PrimaryGrayDarkColor">#262626</Color>
+    <Color x:Key="PrimaryGraySmokeColor">#494949</Color>
 
     <Color x:Key="PrimaryDarkColor">#2e2e2e</Color>
 
     <Color x:Key="PrimaryWhiteColor">#e1e1e1</Color>  
-
+    
+    <Color x:Key="SeparatorMenuDarkColor">#2e2e2e</Color>
     <Color x:Key="SeparatorMenuColor">#494949</Color>
+
+       <!-- MessageBox -->
+    <Color x:Key="MessageBoxHeaderForegroundColor">#e1e1e1</Color>
+    <Color x:Key="MessageBoxTextForegroundColor">#e1e1e1</Color>
+    <Color x:Key="MessageBoxBackgroundColor">#383838</Color> 
+    <Color x:Key="DialogDarkControlBackgroundColor">#1E2023</Color>
 
     <!-- Цвета слайдера -->
     <SolidColorBrush
@@ -42,9 +50,30 @@
     <SolidColorBrush
     x:Key="PrimaryWhite"
     Color="{StaticResource PrimaryWhiteColor}" />
-
-    
+    <SolidColorBrush
+    x:Key="PrimaryGraySmoke"
+    Color="{StaticResource PrimaryGraySmokeColor}" />
+     
     <SolidColorBrush
     x:Key="SeparatorMenu"
     Color="{StaticResource SeparatorMenuColor}" />
+    <SolidColorBrush
+    x:Key="SeparatorMenuDark"
+    Color="{StaticResource SeparatorMenuDarkColor}" />
+     
+     
+ 
+    <SolidColorBrush
+        x:Key="MessageBoxHeaderForeground"
+        Color="{StaticResource MessageBoxHeaderForegroundColor}" />
+    <SolidColorBrush
+        x:Key="MessageBoxTextForeground"
+        Color="{StaticResource MessageBoxTextForegroundColor}" />
+    <SolidColorBrush
+        x:Key="MessageBoxBackground"
+        Color="{StaticResource MessageBoxBackgroundColor}" />
+        
+    <SolidColorBrush
+        x:Key="DialogDarkControlBackground"
+        Color="{StaticResource DialogDarkControlBackgroundColor}" />
 </ResourceDictionary>

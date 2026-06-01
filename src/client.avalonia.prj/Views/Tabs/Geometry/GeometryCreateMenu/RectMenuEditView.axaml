@@ -9,7 +9,9 @@
              xmlns:shapes="using:Client.Avalonia.Views.Geometry.Shapes"
              x:DataType="local:RectMenuEditViewModel"
              
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="80"
+             mc:Ignorable="d" 
+             d:DesignWidth="800"
+             d:DesignHeight="70"
              x:Class="Client.Avalonia.Views.Geometry.RectMenuEditView">
 
     <Design.DataContext>
@@ -18,6 +20,7 @@
 
 
     <StackPanel
+        Background="{StaticResource PrimaryGraySmoke}"
     Orientation="Horizontal"
     Spacing="8">   
 
@@ -62,7 +65,8 @@
 
         <StackPanel Orientation="Vertical" >
             <!-- TO DO: TextBox в значение ещё добавить -->
-            <TextBlock Classes="default menu">
+            <TextBlock Classes="default menu"
+            Width="160">
                 <Run Text="Непрозрачность:"/>
                 <Run Text="{Binding Opacity, StringFormat={}{0:P0}}"/>
             </TextBlock>

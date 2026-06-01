@@ -16,18 +16,16 @@
         <local:GeometryCreateMenuViewModel />
     </Design.DataContext> 
 
-    <Grid 
-    RowDefinitions="auto,*"> 
+    <StackPanel Orientation="Vertical"> 
 
-        <Grid
-        Grid.Row="0"
-        Background="{StaticResource PrimaryBlue}"> 
+        <Grid 
+        Background="{StaticResource PrimaryGray}"> 
             <StackPanel 
-            Margin="8,4,8,0"
+            Margin="13,0,13,0"
             Orientation="Horizontal" 
-            Spacing="4">
+            Spacing="0">
 
-           <!-- TO DO: впихнуть иконки. -->
+           <!-- TO DO: Переделать UI/UX -->
             <RadioButton
             Classes="default menu"
             Content="Прямоугольник"
@@ -35,6 +33,7 @@
             Converter={x:Static uiconv:EnumToBooleanConverter.Instance},
             ConverterParameter={x:Static local:ShapeCreateEnum.Rect},
             Mode=TwoWay}"
+            CornerRadius="6,0,0,0"
             GroupName="Shapes" />
             <RadioButton
             Classes="default menu"
@@ -43,16 +42,20 @@
             Converter={x:Static uiconv:EnumToBooleanConverter.Instance},
             ConverterParameter={x:Static local:ShapeCreateEnum.Circle},
             Mode=TwoWay}"
+            CornerRadius="0,6,0,0"
             GroupName="Shapes"/>
             </StackPanel> 
         </Grid> 
 
-        <Panel
-        Grid.Row="1" >
+        <Separator 
+        Classes="default menu dark" />
+
+        <Panel  
+        Background="{StaticResource PrimaryGraySmoke}">
             <ContentControl  
-                Margin="16,0" 
+                Margin="12,0" 
                 Content="{Binding CurrentShapeCreaterVM}"/>
         </Panel> 
 
-    </Grid> 
+    </StackPanel> 
 </UserControl>

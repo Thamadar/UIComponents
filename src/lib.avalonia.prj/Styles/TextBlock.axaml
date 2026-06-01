@@ -16,6 +16,24 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource NormalFontSize}" /> 
     </Style> 
+     
+    <Style Selector="TextBlock.message-box-header">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,8" />
+        <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Foreground" Value="{DynamicResource MessageBoxHeaderForeground}" />
+    </Style>
+
+    <Style Selector="TextBlock.message-box-message">
+        <Setter Property="IsVisible" Value="{Binding Message.Length}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="32,0,32,8" />
+        <Setter Property="Foreground" Value="{DynamicResource MessageBoxTextForeground}" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextTrimming" Value="WordEllipsis" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
 
     <Style Selector="TextBlock.default">
         <Style Selector="^ TextElement">

@@ -78,52 +78,52 @@
             <Setter Property="Background" Value="{StaticResource PrimaryGray}"/>
             <Setter Property="BorderBrush" Value="{StaticResource PrimaryGray}"/>
             <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
             </Style>
             <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
             </Style>
         </Style>
 
         <Style Selector="^:pointerover:not(:checked)">
-            <Setter Property="Background" Value="#5fc6f1"/>
-            <Setter Property="BorderBrush" Value="#5fc6f1"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryGrayDark}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryGrayDark}"/>
             
             <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
             </Style>
             <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
             </Style> 
         </Style>
           
         
          <Style Selector="^.menu">
             <Setter Property="Height"       Value="32" />
-            <Setter Property="Foreground"   Value="White" /> 
+            <Setter Property="Foreground"   Value="{StaticResource PrimaryWhite}" /> 
             <Setter Property="Background"   Value="{StaticResource PrimaryGray}" />
             <Setter Property="CornerRadius" Value="4,4,0,0"/> 
              
             <Style Selector="^:checked"> 
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="Background" Value="{StaticResource PrimaryGrayDark}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource PrimaryGrayDark}"/>
                 <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
                 </Style>
                 <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
                 </Style>
             </Style>
 
             <Style Selector="^:pointerover:not(:checked)">
-                <Setter Property="Background" Value="#d2e6f4"/>
-                <Setter Property="BorderBrush" Value="#d2e6f4"/>
+                <Setter Property="Background" Value="#787878"/>
+                <Setter Property="BorderBrush" Value="#787878"/>
                 
                 <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
                 </Style>
                 <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="Foreground" Value="{StaticResource PrimaryWhite}" />
                 </Style> 
             </Style>
         </Style>

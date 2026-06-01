@@ -2,11 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-       
+        xmlns:uic="using:Lib.Avalonia.Controls"
+        xmlns:mb="using:Lib.Avalonia.Services.Dialogs.MessageBox"
         xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Xaml.Behaviors.Interactivity"
         xmlns:uibehaviors="using:Lib.Avalonia.Behaviors"    
         xmlns:views="using:Client.Avalonia.Views"
         xmlns:behaviors="using:Client.Avalonia.Behaviors"
+        xmlns:uiconverters="using:Lib.Avalonia.Converters"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:DataType="views:MainWindowViewModel"
         x:Class="Client.Avalonia.MainWindowView"
@@ -23,6 +25,12 @@
         <uibehaviors:AddWindowHotKeysBehavior HotKeys="{Binding HotKeys}"/>
     </i:Interaction.Behaviors>
     
+    <Window.Resources>  
+        <uiconverters:OrMultiValueConverter
+            x:Key="OrConverter" />
+
+    </Window.Resources>
+
     <Grid 
     ColumnDefinitions="auto,*">
         <ItemsControl
@@ -60,5 +68,15 @@
         <ContentControl
         Grid.Column="1"
         Content="{Binding CurrentTabVM}"/>
+         
+        <uic:DialogDarkControl Grid.Row="1"
+        Grid.ColumnSpan="10"
+        IsActive="{Binding IsDialogsOpenedObserve^}"/>
+
+        <mb:MessageBoxView Grid.Row="1"
+        Grid.ColumnSpan="10"
+            DataContext="{Binding DefaultDialogs.MessageBox}"
+            Placement="Center" PlacementAnchor="None"
+            PlacementGravity="None" IsOpen="{Binding IsOpen}"/>
     </Grid> 
 </Window>

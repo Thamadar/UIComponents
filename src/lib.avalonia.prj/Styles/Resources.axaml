@@ -17,6 +17,16 @@
     x:Key="MediumFontSize">
         18
     </x:Double>
+    
+    <CornerRadius
+        x:Key="MessageBoxCornerRadius">
+        8
+    </CornerRadius>
+    
+    <x:Double
+        x:Key="MessageBoxButtonHeight">
+        50
+    </x:Double>
 
     <DrawingBrush
     x:Key="ChessboardBrush" 

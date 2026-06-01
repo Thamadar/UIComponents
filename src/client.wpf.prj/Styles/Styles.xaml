@@ -7,9 +7,9 @@
             Source="../Resources/Icons.xaml" />
         <ResourceDictionary
             Source="Colors.xaml" />
-        
+
         <ResourceDictionary
-            Source="RadioButton.xaml" /> 
+            Source="RadioButton.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

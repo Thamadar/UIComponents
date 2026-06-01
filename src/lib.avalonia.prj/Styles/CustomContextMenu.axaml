@@ -12,8 +12,10 @@
         <Style Selector="^:pointerover">
             <Setter Property="Cursor" Value="Hand"/>  
         </Style> 
-
+        
+        <Setter Property="MaxTextWidth" Value="400"/>
         <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Padding" Value="12,8"/>
@@ -53,17 +55,25 @@
                                     MaxHeight="400">
                                 <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                                               VerticalScrollBarVisibility="Auto">
-                                    <ItemsControl x:Name="PART_ItemsHost"
+                                    <ItemsControl x:Name="ItemsControl"
+                                                  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                   ItemsSource="{Binding Items, RelativeSource={RelativeSource TemplatedParent}}">
                                                   <ItemsControl.ItemTemplate>
                                                       <DataTemplate>
                                                           <controls:CustomMenuItem 
                                                           x:DataType="helpers:IMenuDataItem"
+                                                          CloseCommand="{Binding #ItemsControl.DataContext.CloseCommand}"
+                                                          ColumnDefinitions="{Binding #ItemsControl.DataContext.ColumnDefinitions}"
+                                                          FontSize="{Binding #ItemsControl.DataContext.FontSize}"
+                                                          FontWeight="{Binding #ItemsControl.DataContext.FontWeight}"
+                                                          FontFamily="{Binding #ItemsControl.DataContext.FontFamily}"
+                                                          MaxTextWidth="{Binding #ItemsControl.DataContext.MaxTextWidth}" 
                                                           Icon="{Binding Icon}"
                                                           Key="{Binding Key}"
                                                           Text="{Binding Text}" 
+                                                          Command="{Binding Command}" 
                                                           Items="{Binding Childs}"
-                                                          IsSeparator="{Binding IsSeparator}"
+                                                          IsSeparator="{Binding IsSeparator}" 
                                                           Padding="12,8"
                                                           Background="Transparent"/>
                                                       </DataTemplate>

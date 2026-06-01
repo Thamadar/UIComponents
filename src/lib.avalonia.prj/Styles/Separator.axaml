@@ -13,6 +13,10 @@
           <Setter Property="Height" Value="1"/>
           <Setter Property="Background" Value="{StaticResource SeparatorMenu}"/>
           <Setter Property="IsHitTestVisible" Value="False"/>
+
+          <Style Selector="^.dark"> 
+              <Setter Property="Background" Value="{StaticResource SeparatorMenuDark}"/> 
+          </Style>
       </Style>
   </Style>
 </Styles>

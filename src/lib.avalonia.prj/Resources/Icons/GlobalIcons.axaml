@@ -1,4 +1,22 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <!-- Add Resources Here -->
+   <!-- Крестик  - для панели управления окном. (close) -->
+    <ControlTemplate
+        x:Key="CrossIcon">
+        <Viewbox
+            Stretch="Uniform">
+            <Grid>
+                <Path
+                    Data="M18 6L6 18"
+                    Fill="{TemplateBinding ContentControl.Foreground}"
+                    Stroke="{TemplateBinding ContentControl.Foreground}"
+                    StrokeThickness="1" />
+                <Path
+                    Data="M6 6L18 18"
+                    Fill="{TemplateBinding ContentControl.Foreground}"
+                    Stroke="{TemplateBinding ContentControl.Foreground}"
+                    StrokeThickness="1" />
+            </Grid>
+        </Viewbox>
+    </ControlTemplate>
 </ResourceDictionary>

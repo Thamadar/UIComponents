@@ -1,0 +1,150 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mb="using:Lib.Avalonia.Services.Dialogs.MessageBox"
+        xmlns:vm="using:Lib.Avalonia.Services.Dialogs.MessageBox"
+        xmlns:c="using:Lib.Avalonia.Controls" 
+        xmlns:conv="using:Lib.Avalonia.Converters"
+        xmlns:sys="using:System">
+  <Design.PreviewWith>
+   <Border Width="400"
+              Height="400"
+              Background="Firebrick">
+      <mb:MessageBoxView 
+      Width="300"
+      Height="300"
+      IsOpen="True"
+      x:DataType="vm:MessageBoxViewModel"> 
+      </mb:MessageBoxView>
+    </Border>
+  </Design.PreviewWith>
+
+   <Styles.Resources>
+
+        <conv:SwitchConverter
+            x:Key="IsYesNoStyleConverter">
+            <conv:SwitchConverter.Default>
+                <sys:Boolean>False</sys:Boolean>
+            </conv:SwitchConverter.Default>
+            <conv:Case
+                Key="{x:Static vm:MessageBoxTypeEnum.YesNo}">
+                <conv:Case.Value>
+                    <sys:Boolean>True</sys:Boolean>
+                </conv:Case.Value>
+            </conv:Case>
+        </conv:SwitchConverter>
+         
+        <conv:SwitchConverter
+            x:Key="IsOkStyleConverter">
+            <conv:SwitchConverter.Default>
+                <sys:Boolean>False</sys:Boolean>
+            </conv:SwitchConverter.Default>
+            <conv:Case
+                Key="{x:Static vm:MessageBoxTypeEnum.Ok}">
+                <conv:Case.Value>
+                    <sys:Boolean>True</sys:Boolean>
+                </conv:Case.Value>
+            </conv:Case>
+        </conv:SwitchConverter>
+    </Styles.Resources>
+
+
+    <Style Selector="mb|MessageBoxView">  
+          <Setter Property="MaxWidth" Value="350"/> 
+          <Setter Property="MaxHeight" Value="310"/> 
+          <Setter Property="MinWidth" Value="350"/> 
+          <Setter Property="MinHeight" Value="310"/> 
+        <Style Selector="^ ContentControl#PART_Header">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid
+                        Margin="0,0,0,12"
+                        RowDefinitions="Auto Auto">
+                        <Button
+                            Grid.Row="0"
+                            HorizontalAlignment="Right"
+                            HorizontalContentAlignment="Center"
+                            Background="Transparent"
+                            Command="{Binding OutCommand}">
+                            <ContentControl
+                                Width="16" Height="16"
+                                Margin="-5,-2,0,0"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Foreground="{DynamicResource MessageBoxHeaderForeground}"
+                                Template="{DynamicResource CrossIcon}" />
+                        </Button>
+                        <TextBlock
+                            Classes="medium message-box-header"
+                            Grid.Row="1"
+                            Text="{Binding Header}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+         <Style Selector="^ ContentControl#PART_Container">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <ContentControl
+                        Classes.ok="{Binding MessageBoxType, Converter={StaticResource IsOkStyleConverter}}" 
+                        Classes.yes-no="{Binding MessageBoxType, Converter={StaticResource IsYesNoStyleConverter}}"/>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^ ContentControl.ok">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid
+                        RowDefinitions="*,auto">
+
+                        <TextBlock
+                            Classes="message-box-message"
+                            Grid.Row="0"
+                            Text="{Binding Message}" />
+
+                        <Button
+                            Classes="down-message-box"  
+                            Grid.Row="1"
+                            Margin="32,8"
+                            HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                            Content="ОК"
+                            Command="{Binding Commands.AcceptCommand}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+
+        <Style Selector="^ ContentControl.yes-no">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid
+                        RowDefinitions="*,auto"> 
+
+                        <TextBlock
+                            Classes="message-box-message"
+                            Grid.Row="0"
+                            Text="{Binding Message}" />
+
+                        <Grid
+                            Grid.Row="1"
+                            Margin="32,8"
+                            VerticalAlignment="Bottom"
+                            ColumnDefinitions="*,8,*"> 
+                             
+                            <Button
+                                Classes="down-message-box" 
+                                Grid.Column="0"
+                                Content="ОК"
+                                Command="{Binding Commands.AcceptCommand}" />
+                            <Button
+                                Classes="down-message-box" 
+                                Grid.Column="2"
+                                Content="Нет"
+                                Command="{Binding Commands.CancelCommand}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style> 
+    </Style>
+</Styles>

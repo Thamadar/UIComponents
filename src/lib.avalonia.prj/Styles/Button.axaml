@@ -8,5 +8,12 @@
 
     <Style Selector="Button">
         <Setter Property="Cursor" Value="Hand"/>
+    </Style>  
+    
+    <Style Selector="Button.down-message-box">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Height" Value="{DynamicResource MessageBoxButtonHeight}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 </Styles>

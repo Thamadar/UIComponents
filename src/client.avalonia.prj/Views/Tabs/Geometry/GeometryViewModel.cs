@@ -47,7 +47,15 @@ namespace Client.Avalonia.Views.Geometry
         {
             var hotKeys = new List<IHotKey>
             {
-                new HotKey(Key.Delete, Commands.RemoveShapeCommand)
+                new HotKey(Key.Delete, Commands.RemoveShapeCommand),
+
+                new HotKey(Key.N, GeometryManagementPanelViewModel.Commands.NewFileCommand, keyModifiers: KeyModifiers.Control),
+                new HotKey(Key.O, GeometryManagementPanelViewModel.Commands.OpenFileCommand, keyModifiers: KeyModifiers.Control),
+                new HotKey(Key.S, GeometryManagementPanelViewModel.Commands.SaveFileCommand, keyModifiers: KeyModifiers.Control),
+
+                new HotKey(Key.Z, GeometryManagementPanelViewModel.Commands.StepBackEditCommand, keyModifiers:KeyModifiers.Control),
+                new HotKey(Key.Y, GeometryManagementPanelViewModel.Commands.StepForwardEditCommand, keyModifiers:KeyModifiers.Control),
+                new HotKey(Key.J, GeometryManagementPanelViewModel.Commands.CloneEditCommand, keyModifiers:KeyModifiers.Control),
             };
 
             return hotKeys;

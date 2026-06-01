@@ -250,9 +250,7 @@ namespace Lib.Avalonia.Controls.Helpers
 
         /// <summary>
         /// Открыть/Закрыть указанный CustomMenuItem.
-        /// </summary>
-        /// <param name="menu"></param>
-        /// <param name="open"></param>
+        /// </summary> 
         private void OpenCloseSubMenu(CustomMenuItem menu, bool open)
         {
             if(!menu.IsSeparator && menu.Items.Count() > 0)

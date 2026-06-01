@@ -6,6 +6,7 @@ using DynamicData;
 using Lib.Avalonia;
 using Lib.Avalonia.Extensions;
 using Lib.Avalonia.Helpers;
+using Lib.Avalonia.Services.Dialogs;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -42,9 +43,22 @@ namespace Client.Avalonia.Views
             set => this.RaiseAndSetIfChanged(ref _currentTabVM, value);
         }
 
+        /// <summary>
+        /// Отслеживание состояния "Открыто ли какой-либо IDialog (не окно)?".
+        /// </summary>
+        public IObservable<bool> IsDialogsOpenedObserve { get; }
+
+        /// <summary>
+        /// Хранилище базовых диалоговых панелей.
+        /// </summary>
+        public DefaultDialogs DefaultDialogs { get; } = new();
+
+
         public MainWindowViewModel()
         {
-            _tabService = TabService.Instance;  
+            _tabService = TabService.Instance;
+             
+            IsDialogsOpenedObserve = DialogSystem.IsDialogsOpenedObserve;
 
             HotKeys = new ObservableCollection<IHotKey>();
              

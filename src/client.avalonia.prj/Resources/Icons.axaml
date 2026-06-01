@@ -71,56 +71,74 @@
     </ControlTemplate>
      
     <!--
-    
+    Иконка дискеты.
     -->
     <ControlTemplate
-        x:Key="TestIcon"> 
+        x:Key="SaveIcon"> 
          <Viewbox
-        Stretch="Uniform" 
-        Margin="2,0,0,0">
+            ClipToBounds="False" Stretch="UniformToFill"> 
+                <Path
+                Data="M18.1716 1C18.702 1 19.2107 1.21071 19.5858 1.58579L22.4142 4.41421C22.7893 4.78929 23 5.29799 23 5.82843V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H18.1716ZM4 3C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21L5 21L5 15C5 13.3431 6.34315 12 8 12L16 12C17.6569 12 19 13.3431 19 15V21H20C20.5523 21 21 20.5523 21 20V6.82843C21 6.29799 20.7893 5.78929 20.4142 5.41421L18.5858 3.58579C18.2107 3.21071 17.702 3 17.1716 3H17V5C17 6.65685 15.6569 8 14 8H10C8.34315 8 7 6.65685 7 5V3H4ZM17 21V15C17 14.4477 16.5523 14 16 14L8 14C7.44772 14 7 14.4477 7 15L7 21L17 21ZM9 3H15V5C15 5.55228 14.5523 6 14 6H10C9.44772 6 9 5.55228 9 5V3Z"
+                Fill="{TemplateBinding ContentControl.Foreground}"/> 
+        </Viewbox>
+    </ControlTemplate> 
+    
+    <!--
+    Иконка стрелочки назад.
+    -->
+    <ControlTemplate
+        x:Key="UndoIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill">
             <Grid>
                 
                 <Path
-                Data="M50,5A45,45,0,1,0,95,50,45.00058,45.00058,0,0,0,50,5ZM19.59448,19.59448A42.99068,42.99068,0,0,1,92.82184,46.1806c-.08295-.06793-.15088-.14068-.23779-.20739a1,1,0,0,0-1.2165,1.58752,5.52943,5.52943,0,0,1,1.18756,1.18677.97211.97211,0,0,0,.42145.3266c.00653.309.02344.61535.02344.9259a2.04347,2.04347,0,0,1-.63708,1.34625,13.4011,13.4011,0,0,1-5.08332,2.90253,73.77635,73.77635,0,0,1-15.508,3.43475A170.6829,170.6829,0,0,1,50,59c-12.087.001-23.03278-1.11688-30.891-2.904A38.14808,38.14808,0,0,1,9.93109,53.0116a8.54533,8.54533,0,0,1-2.294-1.66535A2.04318,2.04318,0,0,1,7,50c0-.31055.01691-.61694.02344-.9259a.97211.97211,0,0,0,.42145-.3266,5.528,5.528,0,0,1,1.18756-1.18677A1,1,0,0,0,7.416,45.97321H7.41589c-.08691.06665-.15478.13946-.23773.20733A42.85482,42.85482,0,0,1,19.59448,19.59448Zm60.811,60.811A42.98816,42.98816,0,0,1,7.16205,53.60712,18.72517,18.72517,0,0,0,12.01978,56.122a75.60894,75.60894,0,0,0,15.94946,3.54468A172.6715,172.6715,0,0,0,50,61c12.21332-.0011,23.26752-1.1217,31.33423-2.9538a39.96337,39.96337,0,0,0,9.68133-3.27282,13.01557,13.01557,0,0,0,1.823-1.17365A42.85352,42.85352,0,0,1,80.40552,80.40552Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                
+                Data="M10 21.4199H15C16.8565 21.4199 18.637 20.6824 19.9497 19.3696C21.2625 18.0569 22 16.2764 22 14.4199C22 12.5634 21.2625 10.783 19.9497 9.47021C18.637 8.15746 16.8565 7.41992 15 7.41992H2"
+                Stroke="{TemplateBinding ContentControl.Foreground}"
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="1.5"/> 
+
                 <Path
-                Data="M53,41q1.00387,0,1.99.01013a1,1,0,1,0,.02057-1.99988Q54.01416,39,53,39a1,1,0,0,0,0,2Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                
-                <Path
-                Data="M60.95575,41.16846q1.00479.04366,1.9859.0982a1,1,0,1,0,.111-1.99688q-.99316-.05521-2.01-.09943a1,1,0,1,0-.08685,1.99811Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                
-                <Path
-                Data="M68.88525,41.71423q1.00388.09678,1.97431.20551a1,1,0,0,0,.22265-1.98755q-.98592-.1105-2.00512-.20874a1,1,0,1,0-.19184,1.99078Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                
-                <Path
-                Data="M84.43451,44.46106q.98.28957,1.858.5965a1,1,0,0,0,.65967-1.88807q-.92752-.324-1.95081-.62646a1,1,0,0,0-.56689,1.918Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                
-                <Path
-                Data="M76.748,42.73785v.00007q.99892.16872,1.94574.3515a1,1,0,1,0,.379-1.96375q-.97036-.18723-1.99151-.35986a1,1,0,1,0-.33319,1.972Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                <Path
-                Data="M21.30627,43.08942q.94648-.18265,1.94574-.3515a1,1,0,1,0-.33319-1.97205v-.00006q-1.021.17257-1.99151.35986a1,1,0,1,0,.379,1.96375Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                
-                <Path
-                Data="M13.70746,45.05756q.87726-.30653,1.858-.5965a1,1,0,0,0-.56689-1.918q-1.02293.3024-1.95081.62646a1,1,0,1,0,.65967,1.88807Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                
-                <Path
-                Data="M37.05829,41.26666q.981-.05447,1.986-.0982a1,1,0,0,0-.08685-1.99811q-1.01679.04413-2.01007.09943a1,1,0,1,0,.111,1.99688Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                <Path
-                Data="M29.14044,41.91974q.97018-.10867,1.97431-.20551a1,1,0,0,0-.1919-1.99078q-1.019.09823-2.00506.20874a1,1,0,1,0,.22265,1.98755Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
-                <Path
-                Data="M45.00989,41.01013Q45.996,41.00007,47,41a1,1,0,0,0,0-2q-1.01414,0-2.01062.01025a1,1,0,1,0,.02051,1.99988Z"
-                Fill="{TemplateBinding ContentControl.Foreground}"/>
+                Data="M6 11.4199L2 7.41992L6 3.41992"
+                Stroke="{TemplateBinding ContentControl.Foreground}"
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="1.5"/> 
             </Grid> 
+        </Viewbox>
+    </ControlTemplate> 
+    
+    <!--
+    Иконка стрелочки вперед.
+    -->
+    <ControlTemplate
+        x:Key="RedoIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"
+            Margin="1,0,0,0"> 
+                <ContentControl
+                Template="{StaticResource UndoIcon}">
+                  <ContentControl.RenderTransform>
+                    <ScaleTransform ScaleX="-1" ScaleY="1" />
+                  </ContentControl.RenderTransform>
+                </ContentControl>
+        </Viewbox>
+    </ControlTemplate> 
+    
+    <!--
+    Иконка двух одинаковых объектов.
+    -->
+    <ControlTemplate
+        x:Key="DuplicateIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"> 
+                <Path
+                Data="M36,12V6a2,2,0,0,0-2-2H6A2,2,0,0,0,4,6V34a2,2,0,0,0,2,2h6v6a2,2,0,0,0,2,2H42a2,2,0,0,0,2-2V14a2,2,0,0,0-2-2ZM8,32V8H32V32Zm32,8H16V36H34a2,2,0,0,0,2-2V16h4Z"
+                Stroke="{TemplateBinding ContentControl.Foreground}" 
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="2"/>  
         </Viewbox>
     </ControlTemplate> 
 

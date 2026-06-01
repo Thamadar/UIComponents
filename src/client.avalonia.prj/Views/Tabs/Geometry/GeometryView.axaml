@@ -21,6 +21,10 @@
             Grid.Row="0"
             DataContext="{Binding GeometryManagementPanelViewModel}"/>
 
+            <Separator 
+        Classes="default menu dark" 
+            Margin="0"/>
+
             <!-- TO DO: Redesign -->
             <local:GeometryCreateMenuView 
             DataContext="{Binding GeometryCreateMenuViewModel}" />
