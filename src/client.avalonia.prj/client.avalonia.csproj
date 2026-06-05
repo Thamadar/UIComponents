@@ -32,5 +32,14 @@
       <Compile Update="Views\MainWindowView.axaml.cs">
         <DependentUpon>MainWindowView.axaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\Tabs\Geometry\Tools\Shapes\CircleEdit\ShapeCircleEditView.axaml.cs">
+        <DependentUpon>ShapeCircleEditView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\Tabs\Geometry\Tools\Shapes\RectEdit\ShapeRectEditView.axaml.cs">
+        <DependentUpon>ShapeRectEditView.axaml</DependentUpon>
+      </Compile>
+      <Compile Update="Views\Tabs\Geometry\Tools\ToolEditView.axaml.cs">
+        <DependentUpon>ToolEditView.axaml</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

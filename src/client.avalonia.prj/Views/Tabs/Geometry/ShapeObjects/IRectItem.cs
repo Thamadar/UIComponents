@@ -1,4 +1,4 @@
-﻿  
+﻿
 namespace Client.Avalonia.Views.Geometry.Shapes
 {
     /// <summary>

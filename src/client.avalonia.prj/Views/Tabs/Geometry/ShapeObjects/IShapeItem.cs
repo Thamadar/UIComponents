@@ -1,4 +1,5 @@
-﻿using Avalonia.Media; 
+﻿using Avalonia.Media;
+
 
 namespace Client.Avalonia.Views.Geometry.Shapes
 {

@@ -2,19 +2,18 @@
 using Client.Avalonia.Views.Geometry.Shapes;
 using Lib.Avalonia;
 using Lib.Avalonia.Extensions;
-using ReactiveUI;
+using ReactiveUI; 
 
-namespace Client.Avalonia.Views.Geometry
+namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 {
-    public class RectMenuEditViewModel : ViewModelBase, IShapeCreator
+    public class ShapeCircleEditViewModel : ViewModelBase, IShapeCreator
     {
+
         #region Fields
 
-        private double _width = 20;
-        private double _height = 20;
+        private double _radius = 20;
         private double _borderThickness = 1;
         private double _opacity = 1;
-
         private IBrush _fill;
         private IBrush _borderBrush;
 
@@ -23,21 +22,12 @@ namespace Client.Avalonia.Views.Geometry
         #region Properties
 
         /// <summary>
-        /// Выбранная ширина.
+        /// Выбранный радиус.
         /// </summary>
-        public double Width
+        public double Radius
         {
-            get => _width;
-            set => this.RaiseAndSetIfChanged(ref _width, value);
-        }
-
-        /// <summary>
-        /// Выбранная длина.
-        /// </summary>
-        public double Height
-        {
-            get => _height;
-            set => this.RaiseAndSetIfChanged(ref _height, value);
+            get => _radius;
+            set => this.RaiseAndSetIfChanged(ref _radius, value);
         }
 
         /// <summary>
@@ -56,7 +46,7 @@ namespace Client.Avalonia.Views.Geometry
         {
             get => _opacity;
             set => this.RaiseAndSetIfChanged(ref _opacity, value);
-        }
+        } 
 
         /// <summary>
         /// Заливка.
@@ -76,15 +66,14 @@ namespace Client.Avalonia.Views.Geometry
             set => this.RaiseAndSetIfChanged(ref _borderBrush, value);
         }
 
-        #endregion
+        #endregion 
 
-
-        #region Methods 
+        #region Methods
 
         /// <inheritdoc/>
         public IShapeItem Create(double x, double y)
-        {
-            return new RectItem(x, y, Width, Height, BorderThickness, Opacity, Fill.ToSolidColorBrush(), BorderBrush.ToSolidColorBrush());
+        { 
+            return new CircleItem(x, y, Radius, BorderThickness, Opacity, Fill.ToSolidColorBrush(), BorderBrush.ToSolidColorBrush());
         }
 
         #endregion

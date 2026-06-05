@@ -4,6 +4,7 @@
              xmlns:local="using:Client.Avalonia.Views.Geometry"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:uic="using:Lib.Avalonia.Controls"
+             xmlns:tools="using:Client.Avalonia.Views.Tabs.Geometry.Tools"
              xmlns:shapes="using:Client.Avalonia.Views.Geometry.Shapes" 
              x:DataType="local:GeometryViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -22,12 +23,12 @@
             DataContext="{Binding GeometryManagementPanelViewModel}"/>
 
             <Separator 
-        Classes="default menu dark" 
+            Classes="default menu dark" 
             Margin="0"/>
 
             <!-- TO DO: Redesign -->
-            <local:GeometryCreateMenuView 
-            DataContext="{Binding GeometryCreateMenuViewModel}" />
+            <tools:ToolEditView 
+            DataContext="{Binding CurrentSelectedTool}" />
         </StackPanel> 
 
         <local:DisplayView 

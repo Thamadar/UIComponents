@@ -33,11 +33,11 @@ namespace Client.Avalonia.Views.Geometry
         /// </summary> 
         private void CreateShape(Point point)
         {
-            var newShape = GeometryCreateMenuViewModel.CurrentShapeCreaterVM.Create(point.X, point.Y);
-            if(newShape != null)
-            { 
-                _shapeService.AddShape(newShape);
-            }
+            //var newShape = GeometryCreateMenuViewModel.CurrentShapeCreaterVM.Create(point.X, point.Y);
+            //if(newShape != null)
+            //{ 
+            //    _shapeService.AddShape(newShape);
+            //}
         }
 
         /// <summary>

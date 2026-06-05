@@ -8,8 +8,7 @@ using Client.Avalonia.Services;
 using Client.Avalonia.Views.Geometry.Shapes;
 
 using Lib.Avalonia.Extensions;
-
-using System.Reactive.Linq;
+ 
 using System.Windows.Input;
 
 namespace Client.Avalonia.Behaviors
@@ -25,7 +24,7 @@ namespace Client.Avalonia.Behaviors
             AvaloniaProperty.Register<CanvasHitTestBehavior, ICommand?>(nameof(CreateCommand));
 
         /// <summary>
-        /// ICommand,выполняемый по двойному нажатию.
+        /// 
         /// </summary>
         public ICommand? CreateCommand
         {
@@ -42,11 +41,8 @@ namespace Client.Avalonia.Behaviors
         protected override void OnAttached()
         {
             base.OnAttached();
-
-            this.GetObservable(IsHitTestEnabledProperty)
-                .Do(OnEnabledChanged)
-                .Subscribe()
-                .AddTo(_disposables);
+            
+            AssociatedObject?.AddHandler(Canvas.PointerPressedEvent, OnCanvasPointerPressed, RoutingStrategies.Tunnel);
         }
 
         protected override void OnDetaching()
@@ -55,26 +51,12 @@ namespace Client.Avalonia.Behaviors
 
             AssociatedObject?.RemoveHandler(Canvas.PointerPressedEvent, OnCanvasPointerPressed);
             _disposables.DisposeAll();
-        }
-
-        private void OnEnabledChanged(bool newValue)
-        { 
-            if(AssociatedObject != null)
-            { 
-                if(newValue == true)
-                {
-                    AssociatedObject.AddHandler(Canvas.PointerPressedEvent, OnCanvasPointerPressed, RoutingStrategies.Tunnel); 
-                }
-                else
-                {
-                    AssociatedObject.RemoveHandler(Canvas.PointerPressedEvent, OnCanvasPointerPressed);
-                }
-            } 
-        }
+        } 
 
         private void OnCanvasPointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            if(AssociatedObject != null)
+            if(AssociatedObject != null && 
+               IsHitTestEnabled)
             {
                 var point = e.GetPosition(AssociatedObject);
 
@@ -87,9 +69,10 @@ namespace Client.Avalonia.Behaviors
                 else
                 {
                     CanvasPress(AssociatedObject, point);
-                } 
-            }
-            e.Handled = true;  
+                }
+
+                e.Handled = true;
+            } 
         }
 
         /// <summary>
@@ -101,7 +84,7 @@ namespace Client.Avalonia.Behaviors
         }
 
         /// <summary>
-        /// Реакция на нажатие по графическому элементу
+        /// Реакция на нажатие по графическому элементу.
         /// </summary> 
         private void ShapePress(Control hitElement, Point point)
         {

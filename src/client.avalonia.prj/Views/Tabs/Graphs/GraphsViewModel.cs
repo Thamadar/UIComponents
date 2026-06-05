@@ -1,4 +1,5 @@
-﻿using Client.Avalonia.Services;
+﻿using Avalonia.Input;
+using Client.Avalonia.Services;
 using Client.Avalonia.Services.Interfaces;
 using Client.Avalonia.Views.Geometry;
 using Lib.Avalonia;
@@ -18,10 +19,13 @@ namespace Client.Avalonia.Views.Graphs
     public sealed partial class GraphsViewModel : ViewModelBase, ITabVM
     {
 
-        #region Properties
+        #region Fields
 
-        public GeometryCreateMenuViewModel GeometryCreateMenuViewModel { get; }
-        public DisplayViewModel DisplayViewModel { get; }
+        private IEnumerable<IHotKey> _defaultTabHotKeys = new IHotKey[0];
+
+        #endregion 
+
+        #region Properties
 
         /// <inheritdoc/>
         public Guid Id { get; }
@@ -41,6 +45,8 @@ namespace Client.Avalonia.Views.Graphs
         public GraphsViewModel(Guid id)
         { 
             Id = id;
+
+            InitDefaultHotKeys();
         }
 
         #endregion
@@ -48,15 +54,7 @@ namespace Client.Avalonia.Views.Graphs
         #region Methods
 
         /// <inheritdoc/>
-        public IEnumerable<IHotKey> GetTabHotKeys()
-        {
-            var hotKeys = new List<IHotKey>
-            {
-
-            };
-
-            return hotKeys;
-        }
+        public IEnumerable<IHotKey> GetTabHotKeys() => _defaultTabHotKeys;
 
         /// <inheritdoc/>
         public Task DisposeTab()
@@ -78,5 +76,15 @@ namespace Client.Avalonia.Views.Graphs
 
         #endregion
 
+        /// <summary>
+        /// Инициализация горячих клавиш данной вкладки.
+        /// </summary>
+        private void InitDefaultHotKeys()
+        {
+            _defaultTabHotKeys = new List<IHotKey>
+            {
+                //Какие-то горячие клавиши...
+            };
+        }
     }
 }

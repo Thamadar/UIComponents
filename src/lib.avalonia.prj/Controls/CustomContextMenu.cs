@@ -116,7 +116,7 @@ namespace Lib.Avalonia.Controls
         }   
 
         public CustomContextMenu()
-        {
+        { 
             CloseCommand = ReactiveCommand.Create(() => { IsDropDownOpen = false; });
         }
          

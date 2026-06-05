@@ -1,5 +1,5 @@
 ﻿using Avalonia.Media;
-using ReactiveUI; 
+using ReactiveUI;
 
 namespace Client.Avalonia.Views.Geometry.Shapes
 {

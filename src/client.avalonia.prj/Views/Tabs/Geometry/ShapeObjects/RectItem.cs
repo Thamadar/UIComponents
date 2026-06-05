@@ -1,6 +1,6 @@
 ﻿using Avalonia.Media;
-using Client.Avalonia.Views.Geometry.Shapes;
-using ReactiveUI; 
+using ReactiveUI;
+
 
 namespace Client.Avalonia.Views.Geometry.Shapes
 {
