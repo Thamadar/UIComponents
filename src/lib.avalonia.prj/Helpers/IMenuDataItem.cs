@@ -9,13 +9,15 @@ namespace Lib.Avalonia.Helpers
     { 
         public ObservableCollection<IMenuDataItem>? Childs { get; }
 
-        public ControlTemplate? Icon { get; }
+        public ControlTemplate? Icon { get; set; }
 
         public ICommand? Command { get; }
 
+        public object? CommandParameter { get; }
+
         public string? Key { get; set; }
 
-        public string Text { get; set; }   
+        public string? Text { get; set; }   
 
         public bool IsSeparator { get; }
 

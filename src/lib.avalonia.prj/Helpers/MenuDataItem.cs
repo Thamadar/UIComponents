@@ -9,21 +9,29 @@ namespace Lib.Avalonia.Helpers
 {
     public class MenuDataItem : ReactiveObject, IMenuDataItem
     {
+        private ControlTemplate? _icon;
 
         /// <inheritdoc/>
         public ObservableCollection<IMenuDataItem>? Childs { get; }
-         
+
         /// <inheritdoc/>
-        public ControlTemplate? Icon { get; }
+        public ControlTemplate? Icon
+        {
+            get => _icon;
+            set => this.RaiseAndSetIfChanged(ref _icon, value);
+        }
 
         /// <inheritdoc/>
         public string? Key { get; set; }
 
         /// <inheritdoc/>
-        public string Text { get; set; }   
+        public string? Text { get; set; }   
 
         /// <inheritdoc/>
-        public ICommand? Command { get; } 
+        public ICommand? Command { get; }
+
+        /// <inheritdoc/>
+        public object? CommandParameter { get; set; }
 
         /// <inheritdoc/>
         public bool IsSeparator { get; }  
@@ -32,17 +40,19 @@ namespace Lib.Avalonia.Helpers
             string text = "", 
             ControlTemplate? icon = null,
             ICommand? command = null,
+            object? commandParameter = null,
             IEnumerable<IMenuDataItem>? childs = null, 
             string? key = null,
             bool isSeparator = false)
         {
             Childs = new ObservableCollection<IMenuDataItem>();
 
-            Text        = text;
-            Icon        = icon;
-            Command     = command;
-            Key         = key;
-            IsSeparator = isSeparator; 
+            Text                 = text;
+            Icon                 = icon;
+            Command              = command;
+            CommandParameter     = commandParameter;
+            Key                  = key;
+            IsSeparator          = isSeparator; 
             if(childs != null)
             {
                 Childs.AddRange(childs);

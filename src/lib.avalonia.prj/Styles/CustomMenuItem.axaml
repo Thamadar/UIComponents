@@ -113,6 +113,7 @@
                                                 Text="{Binding Text}" 
                                                 Items="{Binding Childs}"
                                                 Command="{Binding Command}"
+                                                CommandParameter="{Binding CommandParameter}"
                                                 IsSeparator="{Binding IsSeparator}"
                                                 Padding="12,8"
                                                 Background="Transparent"/>

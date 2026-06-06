@@ -28,6 +28,8 @@ namespace Client.Avalonia.Views.Geometry
 
         public GeometryViewModelCommands Commands => _commands ??= new(this);
 
+        #region Methods
+
         /// <summary>
         /// Создание новой геом-фигуры.
         /// </summary> 
@@ -51,5 +53,7 @@ namespace Client.Avalonia.Views.Geometry
                 _shapeService.RemoveShapeById(currentShape.Id);
             } 
         }
+
+        #endregion
     }
 }

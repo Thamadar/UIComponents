@@ -18,9 +18,7 @@ namespace Lib.Avalonia.Controls
 {
     public class CustomContextMenu : TemplatedControl
     { 
-        private ContextMenuControlGroupManager? _contextMenuGroupManager;
-
-        private ColumnDefinitions? _columnDefinitions;
+        private ContextMenuControlGroupManager? _contextMenuGroupManager; 
 
         public static readonly StyledProperty<object?> ContentProperty =
             AvaloniaProperty.Register<CustomContextMenu, object?>(nameof(Content));
@@ -34,12 +32,17 @@ namespace Lib.Avalonia.Controls
         public static readonly StyledProperty<ICommand?> CommandProperty =
             AvaloniaProperty.Register<CustomContextMenu, ICommand?>(nameof(Command));
 
+        public static readonly StyledProperty<object?> CommandParameterProperty =
+            AvaloniaProperty.Register<CustomContextMenu, object?>(nameof(CommandParameter));
 
         public static readonly StyledProperty<ICommand> CloseCommandProperty =
             AvaloniaProperty.Register<CustomMenuItem, ICommand>(nameof(CloseCommand));
          
         public static readonly StyledProperty<bool> IsDropDownOpenProperty =
             AvaloniaProperty.Register<CustomContextMenu, bool>(nameof(IsDropDownOpen), false);
+
+        public static readonly StyledProperty<bool> IsHoldOpenMoveModeProperty =
+            AvaloniaProperty.Register<CustomContextMenu, bool>(nameof(IsHoldOpenMoveMode));
 
         public static readonly StyledProperty<string?> GroupNameProperty =
             AvaloniaProperty.Register<CustomContextMenu, string?>(nameof(GroupName));
@@ -53,6 +56,9 @@ namespace Lib.Avalonia.Controls
             set => SetValue(ItemsProperty, value);
         }
 
+        /// <summary>
+        /// Колоны для элементов в выпадающем списке (Text + Key).
+        /// </summary>
         public ColumnDefinitions? ColumnDefinitions
         {
             get => GetValue(ColumnDefinitionsProperty);
@@ -67,6 +73,16 @@ namespace Lib.Avalonia.Controls
             get => GetValue(CommandProperty);
             set => SetValue(CommandProperty, value);
         }
+
+        /// <summary>
+        /// CommandParameter.
+        /// </summary>
+        public object? CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        }
+
         /// <summary>
         /// Command завершения работы данного menu (закрывающий popup).
         /// </summary>
@@ -108,7 +124,17 @@ namespace Lib.Avalonia.Controls
         {
             get => GetValue(IsDropDownOpenProperty);
             set => SetValue(IsDropDownOpenProperty, value);
-        }   
+        }
+
+        /// <summary>
+        /// Включен ли режим, при котором если какое-либо меню открыто из группы, то при наведении на другое меню данной группы 
+        /// оно автоматически откроется, закрыв предыдущее.
+        /// </summary>
+        public bool IsHoldOpenMoveMode
+        {
+            get => GetValue(IsHoldOpenMoveModeProperty);
+            set => SetValue(IsHoldOpenMoveModeProperty, value);
+        }
 
         static CustomContextMenu()
         {
@@ -140,11 +166,16 @@ namespace Lib.Avalonia.Controls
         {
             base.OnPointerEntered(e);
              
-            _contextMenuGroupManager?.OnPointerEntered(this);
+            if(IsHoldOpenMoveMode && Items.Count > 0)
+            {
+                _contextMenuGroupManager?.OnPointerEntered(this);
+            }
         }
 
         protected override void OnPointerPressed(PointerPressedEventArgs e)
         {
+            _contextMenuGroupManager?.OnPointedPressed(this);  
+
             if(Items.Count > 0)
             {
                 IsDropDownOpen = !IsDropDownOpen;
@@ -155,7 +186,7 @@ namespace Lib.Avalonia.Controls
             }
             else
             { 
-                Command?.Execute(null);
+                Command?.Execute(CommandParameter);
             } 
             
             e.Handled = true; 
@@ -198,7 +229,7 @@ namespace Lib.Avalonia.Controls
         }
 
         private void SetMenuTextWidth()
-        {
+        { 
             var columnDifs = CustomMenuItem.GetTextColumnDifs(Items, MaxTextWidth, FontSize, FontFamily, FontWeight, FontStyle);
 
             ColumnDefinitions = columnDifs;

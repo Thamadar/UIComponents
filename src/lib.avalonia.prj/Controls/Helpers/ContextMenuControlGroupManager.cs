@@ -103,6 +103,43 @@ namespace Lib.Avalonia.Controls.Helpers
         }
 
         /// <summary>
+        /// Инструкция выполнения действий из-за нажатия по CustomContextMenu.
+        /// </summary>
+        public void OnPointedPressed(CustomContextMenu menuPressed)
+        {
+            if(menuPressed.IsDropDownOpen || 
+               _ignoreIsDropDownOpenChanges)
+            {
+                return;
+            }
+
+            _ignoreIsDropDownOpenChanges = true;
+            try
+            {
+                var groupName = menuPressed.GroupName;
+                if(!string.IsNullOrEmpty(groupName))
+                {
+                    if(_registeredGroups.TryGetValue(groupName, out var group))
+                    {
+                        if(menuPressed.Items.Count > 0 ||
+                           !IsAnyOpened(group))
+                            return;
+
+                        CloseAllItemsExcept(group); 
+                        if(group.Count == 0)
+                        {
+                            _registeredGroups.Remove(groupName);
+                        } 
+                    }
+                }
+            }
+            finally
+            {
+                _ignoreIsDropDownOpenChanges = false;
+            }
+        }
+
+        /// <summary>
         /// Реакция на изменение свойства OnIsDropDownOpenChanged в CustomContextMenu.
         /// </summary>
         /// <param name="menu"></param>
@@ -140,17 +177,17 @@ namespace Lib.Avalonia.Controls.Helpers
         /// </summary>
         /// <param name="group">группа</param>
         /// <param name="menu">исключение</param>
-        private void CloseAllItemsExcept(List<WeakReference<CustomContextMenu>> group, CustomContextMenu menu)
+        private void CloseAllItemsExcept(List<WeakReference<CustomContextMenu>> group, CustomContextMenu? menu = null)
         {
             var i = 0;
             while(i < group.Count)
             {
                 if(group.TryGetTargetOrRemove(out var current, i))
-                {
-
+                { 
                     if(current.IsDropDownOpen)
                     {
-                        if(current != menu)
+                        if(menu == null ||
+                           menu != null && current != menu)
                         {
                             current.IsDropDownOpen = false;
                         }

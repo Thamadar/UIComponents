@@ -1,13 +1,17 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="using:Client.Avalonia.Views.Geometry"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             
+             xmlns:local="using:Client.Avalonia.Views.Geometry"
              xmlns:uic="using:Lib.Avalonia.Controls"
              xmlns:tools="using:Client.Avalonia.Views.Tabs.Geometry.Tools"
              xmlns:shapes="using:Client.Avalonia.Views.Geometry.Shapes" 
+             xmlns:uih="using:Lib.Avalonia.Helpers" 
+
              x:DataType="local:GeometryViewModel"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" 
+             d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Client.Avalonia.Views.Geometry.GeometryView">
 
     <Design.DataContext>
@@ -34,5 +38,13 @@
         <local:DisplayView 
         Grid.Row="1"
         DataContext="{Binding DisplayViewModel}"/> 
+
+        <tools:ToolsPanelView 
+        Grid.Row="1" 
+        Width="32" 
+        HorizontalAlignment="Left" 
+        Margin="0,12"
+        DataContext="{Binding ToolsPanelViewModel}"/>
+              
     </Grid> 
 </UserControl>

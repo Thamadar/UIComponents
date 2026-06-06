@@ -30,7 +30,8 @@ namespace Client.Avalonia.Views.Geometry
         #region Properties
 
         public GeometryManagementPanelViewModel GeometryManagementPanelViewModel { get; }
-        public DisplayViewModel DisplayViewModel { get; } 
+        public DisplayViewModel DisplayViewModel { get; }
+        public ToolsPanelViewModel ToolsPanelViewModel { get; }
 
         /// <summary>
         /// Текущий выбранный инструмент (заливка, текст, перемещение, ...) .
@@ -66,6 +67,7 @@ namespace Client.Avalonia.Views.Geometry
 
             GeometryManagementPanelViewModel = new GeometryManagementPanelViewModel();
             DisplayViewModel                 = new DisplayViewModel(Commands.CreateShapeCommand);
+            ToolsPanelViewModel              = new ToolsPanelViewModel();
              
             _toolService
                 .CurrentSelectedToolObservable

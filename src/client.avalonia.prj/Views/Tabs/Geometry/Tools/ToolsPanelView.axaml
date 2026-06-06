@@ -1,0 +1,57 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+                   
+             xmlns:local="using:Client.Avalonia.Views.Tabs.Geometry.Tools"
+             xmlns:uic="using:Lib.Avalonia.Controls"
+             xmlns:tools="using:Client.Avalonia.Views.Tabs.Geometry.Tools"
+             xmlns:shapes="using:Client.Avalonia.Views.Geometry.Shapes" 
+             xmlns:uih="using:Lib.Avalonia.Helpers" 
+             
+             x:DataType="local:ToolsPanelViewModel" 
+
+             d:DesignWidth="30" d:DesignHeight="450" 
+             x:Class="Client.Avalonia.Views.Tabs.Geometry.Tools.ToolsPanelView">
+  
+    <Design.DataContext>
+        <local:ToolsPanelViewModel />
+    </Design.DataContext>
+
+     <Border  
+        Background="{StaticResource PrimaryGraySmoke}" 
+        CornerRadius="0,4,4,0"
+        VerticalAlignment="Top">
+              <ItemsControl
+              ItemsSource="{Binding ToolMenuItems}">
+              <ItemsControl.ItemsPanel>
+                       <ItemsPanelTemplate>
+                           <StackPanel 
+                           Orientation="Vertical"/>
+                       </ItemsPanelTemplate>
+               </ItemsControl.ItemsPanel>
+               <ItemsControl.ItemTemplate>
+                   <DataTemplate 
+                   x:DataType="uih:IMenuDataItem">
+                       <uic:CustomContextMenu  
+                       Classes="tools"
+                       Items="{Binding Childs}"
+                       Command="{Binding Command}"
+                       GroupName="ToolsPanel">
+                           <uic:CustomContextMenu.Content>
+                                <!-- Иконка -->
+                                    <ContentControl
+                                    ClipToBounds="False" 
+                                    Content="{Binding Icon}"
+                                    Template="{Binding Icon}"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Width="16"
+                                    Height="16"/>
+                           </uic:CustomContextMenu.Content>
+                       </uic:CustomContextMenu>
+                   </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl> 
+        </Border>
+</UserControl>

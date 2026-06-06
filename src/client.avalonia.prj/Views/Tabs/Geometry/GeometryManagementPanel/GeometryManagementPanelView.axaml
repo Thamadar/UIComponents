@@ -28,13 +28,13 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate x:DataType="uih:IMenuDataItem">
-                    <uic:CustomContextMenu Items="{Binding Childs}"
-                    Command="{Binding Command}"
+                    <uic:CustomContextMenu 
+                    IsHoldOpenMoveMode="True"
+                    Items="{Binding Childs}"
+                    Command="{Binding Command}" 
                     GroupName="GeometryManagementPanel">
-                        <uic:CustomContextMenu.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Text}"/>
-                            </StackPanel>
+                        <uic:CustomContextMenu.Content> 
+                            <TextBlock Text="{Binding Text}"/> 
                         </uic:CustomContextMenu.Content>
                     </uic:CustomContextMenu>
                 </DataTemplate>

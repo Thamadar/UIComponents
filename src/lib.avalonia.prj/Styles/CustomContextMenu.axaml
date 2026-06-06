@@ -71,6 +71,7 @@
                                                           Icon="{Binding Icon}"
                                                           Key="{Binding Key}"
                                                           Text="{Binding Text}" 
+                                                          CommandParameter="{Binding CommandParameter}"
                                                           Command="{Binding Command}" 
                                                           Items="{Binding Childs}"
                                                           IsSeparator="{Binding IsSeparator}" 
@@ -95,6 +96,6 @@
         <Style Selector="^[IsDropDownOpen=True]">
             <Setter Property="Background"  Value="{StaticResource PrimaryDark}"/>
             <Setter Property="BorderBrush" Value="#787878"/>
-        </Style>
+        </Style> 
   </Style>
 </Styles>

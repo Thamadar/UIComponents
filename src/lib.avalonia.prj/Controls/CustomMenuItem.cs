@@ -44,6 +44,9 @@ namespace Lib.Avalonia.Controls
         public static readonly StyledProperty<ICommand?> CommandProperty =
             AvaloniaProperty.Register<CustomMenuItem, ICommand?>(nameof(Command));
 
+        public static readonly StyledProperty<object?> CommandParameterProperty =
+            AvaloniaProperty.Register<CustomMenuItem, object?>(nameof(CommandParameter)); 
+
         public static readonly StyledProperty<ICommand> CloseCommandProperty =
             AvaloniaProperty.Register<CustomMenuItem, ICommand>(nameof(CloseCommand));
 
@@ -128,6 +131,15 @@ namespace Lib.Avalonia.Controls
             get => GetValue(CommandProperty);
             set => SetValue(CommandProperty, value);
         }
+         
+        /// <summary>
+        /// CommandParameter.
+        /// </summary>
+        public object? CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        } 
 
         /// <summary>
         /// Command завершения работы данного menu (закрывающий popup).
@@ -199,13 +211,13 @@ namespace Lib.Avalonia.Controls
             FontWeight fontWeight,
             FontStyle fontStyle)
         {
-            var longTextString = menuItems.MaxBy(x => x.Text.Length)?.Text;
+            var longTextString = menuItems.MaxBy(x => x.Text?.Length)?.Text;
             var longKeyString  = menuItems.MaxBy(x => x.Key?.Length)?.Key;
 
             var calculatedTextWidth = longTextString?.GetTextWidth(fontSize, fontFamily, fontWeight, fontStyle);
             var calculatedKeyWidth  = longKeyString?.GetTextWidth(fontSize, fontFamily, fontWeight, fontStyle);
 
-            var resultTextWidth = ((calculatedTextWidth > maxTextWidth ? maxTextWidth : calculatedTextWidth) ?? 1) + 32; // +отступ cбоку.
+            var resultTextWidth = ((calculatedTextWidth > maxTextWidth ? maxTextWidth : calculatedTextWidth) ?? 1) + 32; // 32 - отступ cбоку. TO DO: вынести в свойство?
             var resultKeyWidth  = ((calculatedKeyWidth + 4 > 80 ? 80 : calculatedKeyWidth) ?? 0); 
 
             var columnDifs = new ColumnDefinitions();
@@ -240,7 +252,7 @@ namespace Lib.Avalonia.Controls
                 if(Items.Count() == 0)
                 {
                     Close();
-                    Command?.Execute(null);
+                    Command?.Execute(CommandParameter);
                 } 
             }
 

@@ -24,6 +24,8 @@
             
     <StyleInclude
             Source="avares://client.avalonia/Styles/MessageBoxView.axaml" />
+    <StyleInclude
+            Source="avares://client.avalonia/Styles/CustomContextMenu.axaml" />
 
     <StyleInclude
             Source="avares://client.avalonia/Styles/TextBlock.axaml" />

@@ -102,7 +102,7 @@ namespace Lib.Avalonia.Controls.Helpers
         }
 
         /// <summary>
-        /// Действие, исполняемое при исполнении таймера, реагирующего на нажатие по CustomMenuItem.
+        /// Инструкция выполнения действий из-за нажатия по CustomMenuItem.
         /// </summary>
         private void OnPointedPressedAction()
         {
