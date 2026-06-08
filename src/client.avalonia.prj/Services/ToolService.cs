@@ -88,8 +88,8 @@ namespace Client.Avalonia.Services
             var selectedTool = _totalTools.Items.First(x => x.ToolType == toolType);
 
             CurrentSelectedTool?.OnDeselect();
-            CurrentSelectedTool = selectedTool;
-            CurrentSelectedTool?.OnSelect(); 
+            selectedTool.OnSelect();
+            CurrentSelectedTool = selectedTool; 
         }
 
         private void InitTools()
