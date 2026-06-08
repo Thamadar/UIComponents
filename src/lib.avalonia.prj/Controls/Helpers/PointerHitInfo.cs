@@ -4,12 +4,12 @@ using System;
 
 namespace Lib.Avalonia.Controls.Helpers
 {
-    public class PointerCanvasEventArgs : EventArgs
+    public class PointerHitInfo
     {
-        public Control HitControl { get; }
+        public Control? HitControl { get; }
         public Point Point { get; }
 
-        public PointerCanvasEventArgs(Control hitControl, Point point)
+        public PointerHitInfo(Control? hitControl, Point point)
         {
             HitControl = hitControl;
             Point      = point;

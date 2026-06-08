@@ -13,21 +13,27 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
     public class FillTool : BaseTool
     {
         #region Fields
-         
+
 
         #endregion
 
         #region Properties
-         
-          
+
+        /// <summary>
+        /// VM-Редактор для заливки.
+        /// </summary>
+        public FillEditViewModel FillEditViewModel { get; }
+
         #endregion
 
         #region Constructors
 
         public FillTool()
             : base(ToolTypeEnum.Fill)
-        { 
-            //CurrentToolEditVM = ShapeCircleEditViewModel;
+        {
+            FillEditViewModel = new FillEditViewModel();
+
+            CurrentToolEditVM = FillEditViewModel;
         }
 
         #endregion
@@ -48,13 +54,9 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         }
 
         /// <inheritdoc/>
-        public override void OnPointerPressedCanvas(object? sender, PointerCanvasEventArgs e)
+        public override void OnPointerPressedCanvas(PointerHitInfo pointerHitInfo)
         {
-            if(e.HitControl != null)
-            {
-                
-                base.OnPointerPressedCanvas(sender, e);
-            }
+
         }
 
         #endregion

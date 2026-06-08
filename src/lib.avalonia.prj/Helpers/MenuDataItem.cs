@@ -18,7 +18,7 @@ namespace Lib.Avalonia.Helpers
         public ControlTemplate? Icon
         {
             get => _icon;
-            set => this.RaiseAndSetIfChanged(ref _icon, value);
+            private set => this.RaiseAndSetIfChanged(ref _icon, value);
         }
 
         /// <inheritdoc/>
@@ -34,6 +34,9 @@ namespace Lib.Avalonia.Helpers
         public object? CommandParameter { get; set; }
 
         /// <inheritdoc/>
+        public object? Tag { get; }
+
+        /// <inheritdoc/>
         public bool IsSeparator { get; }  
 
         public MenuDataItem(
@@ -41,6 +44,7 @@ namespace Lib.Avalonia.Helpers
             ControlTemplate? icon = null,
             ICommand? command = null,
             object? commandParameter = null,
+            object? tag = null,
             IEnumerable<IMenuDataItem>? childs = null, 
             string? key = null,
             bool isSeparator = false)
@@ -51,6 +55,7 @@ namespace Lib.Avalonia.Helpers
             Icon                 = icon;
             Command              = command;
             CommandParameter     = commandParameter;
+            Tag                  = tag;
             Key                  = key;
             IsSeparator          = isSeparator; 
             if(childs != null)
@@ -70,5 +75,8 @@ namespace Lib.Avalonia.Helpers
         { 
             Childs?.RemoveMany(removeChilds);
         }
+
+        /// <inheritdoc/>
+        public void SetIcon(ControlTemplate? icon) => Icon = icon;
     }
 }

@@ -9,11 +9,13 @@ namespace Lib.Avalonia.Helpers
     { 
         public ObservableCollection<IMenuDataItem>? Childs { get; }
 
-        public ControlTemplate? Icon { get; set; }
+        public ControlTemplate? Icon { get; }
 
         public ICommand? Command { get; }
 
         public object? CommandParameter { get; }
+
+        public object? Tag { get; }
 
         public string? Key { get; set; }
 
@@ -30,5 +32,12 @@ namespace Lib.Avalonia.Helpers
         /// Удалить список элементов IMenuDataItem из коллекции Childs.
         /// </summary> 
         public void ChildsRemoveRange(IEnumerable<IMenuDataItem> removeChilds);
+        
+        /// <summary>
+        /// Установка иконки.
+        /// </summary>
+        /// <param name="icon"></param>
+
+        public void SetIcon(ControlTemplate? icon);
     }
 }

@@ -13,12 +13,16 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
     public class MovingTool : BaseTool
     {
         #region Fields
-         
+
 
         #endregion
 
         #region Properties
-         
+
+        /// <summary>
+        /// VM-Редактор для перемещения.
+        /// </summary>
+        public MovingEditViewModel MovingEditViewModel { get; }
 
         #endregion
 
@@ -26,8 +30,10 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 
         public MovingTool()
             : base(ToolTypeEnum.Moving)
-        { 
-            //CurrentToolEditVM = ShapeCircleEditViewModel;
+        {
+            MovingEditViewModel = new MovingEditViewModel();
+
+            CurrentToolEditVM = MovingEditViewModel;
         }
 
         #endregion
@@ -48,13 +54,9 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         }
 
         /// <inheritdoc/>
-        public override void OnPointerPressedCanvas(object? sender, PointerCanvasEventArgs e)
+        public override void OnPointerPressedCanvas(PointerHitInfo pointerHitInfo)
         {
-            if(e.HitControl != null)
-            { 
 
-                base.OnPointerPressedCanvas(sender, e);
-            }
         }
 
         #endregion

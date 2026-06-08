@@ -13,12 +13,17 @@ namespace Client.Avalonia.Services.Interfaces
         /// <summary>
         /// Отслеживание текущего инструмента.
         /// </summary>
-        IObservable<ITool?> CurrentSelectedToolObservable { get; }
+        IObservable<ITool> CurrentSelectedToolObservable { get; }
 
         /// <summary>
         /// Получить текущего выделенного инструмента.
         /// </summary> 
-        ITool? GetCurrentSelectedTool();
+        ITool GetCurrentSelectedTool();
+
+        /// <summary>
+        /// Получить инструмента типа T.
+        /// </summary> 
+        T? GetTool<T>() where T : ITool;
 
         /// <summary>
         /// Выбрать инструмент.

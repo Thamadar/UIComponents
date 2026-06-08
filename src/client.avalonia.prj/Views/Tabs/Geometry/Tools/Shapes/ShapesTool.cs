@@ -1,4 +1,5 @@
 ﻿using Client.Avalonia.Services;
+using Client.Avalonia.Services.Interfaces;
 using Client.Avalonia.Views.Geometry.Shapes; 
 using Lib.Avalonia.Controls.Helpers;
 using Lib.Avalonia.Extensions;
@@ -11,6 +12,8 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
     public class ShapesTool : BaseTool
     { 
         #region Fields
+
+        private readonly IShapeService _shapeService;
 
         private ShapeCreateEnum _selectedShapeCreate; 
 
@@ -44,10 +47,12 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         public ShapesTool()
             : base(ToolTypeEnum.Shapes)
         {
+            _shapeService = ShapeService.Instance;
+
             ShapeCircleEditViewModel = new ShapeCircleEditViewModel();
             ShapeRectEditViewModel   = new ShapeRectEditViewModel();
 
-            CurrentToolEditVM = ShapeCircleEditViewModel;
+            CurrentToolEditVM = ShapeRectEditViewModel;
         }
 
         #endregion
@@ -64,29 +69,33 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
             this.WhenAnyValue(x => x.SelectedShapeCreate)
                 .Do(OnSelectedShapeCreate)
                 .Subscribe()
-                .AddTo(_observables);
+                .AddTo(_observables); 
         }
 
         /// <inheritdoc/>
-        public override void OnPointerPressedCanvas(object? sender, PointerCanvasEventArgs e)
+        public override void OnPointerPressedCanvas(PointerHitInfo pointerHitInfo)
         {   
-            if(e.HitControl != null)
+            if(pointerHitInfo.HitControl != null)
             { 
-                if(e.HitControl.DataContext is IShapeItem shapeItem)
+                if(pointerHitInfo.HitControl.DataContext is IShapeItem shapeItem)
                 {
                     ShapeService.Instance.SelectShapeById(shapeItem.Id);
                 }
                 else
                 {
-                    //CanvasPress(AssociatedObject, point);
+                    var currentToolEditVM = CurrentToolEditVM as IShapeCreator;
+                    var newShape = currentToolEditVM?.Create(pointerHitInfo.Point.X, pointerHitInfo.Point.Y);
+                    if(newShape != null)
+                    {
+                        _shapeService.AddShape(newShape);
+                    }
                 }
 
-                base.OnPointerPressedCanvas(sender, e);
+                base.OnPointerPressedCanvas(pointerHitInfo);
             }  
         }
 
         #endregion
-
 
         /// <inheritdoc/>
         public override List<IHotKey> GetToolHotKeys()
@@ -95,7 +104,7 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
             {
 
             };
-        }
+        } 
 
         /// <summary>
         /// Реакция на изменения значения "Текущий тип редактируемой фигуры".

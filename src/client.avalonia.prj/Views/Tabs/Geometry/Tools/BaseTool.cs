@@ -2,7 +2,8 @@
 using Lib.Avalonia.Extensions;
 using Lib.Avalonia.Helpers;
 
-using ReactiveUI; 
+using ReactiveUI;
+using System.Reactive;
 
 namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 {
@@ -27,13 +28,13 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         }
 
         /// <inheritdoc/>
-        public ToolTypeEnum ToolType { get; } 
+        public ToolTypeEnum ToolType { get; }
 
         /// <inheritdoc/>
-        public event EventHandler<PointerCanvasEventArgs> PointerPressedCanvas;
+        public ReactiveCommand<PointerHitInfo, Unit> PointerPressedCanvas { get; }
 
         /// <inheritdoc/>
-        public event EventHandler<PointerCanvasEventArgs> PointerReleasedCanvas;
+        public ReactiveCommand<PointerHitInfo, Unit> PointerReleasedCanvas { get; } 
 
         #endregion
 
@@ -42,7 +43,10 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         protected BaseTool(
             ToolTypeEnum toolType)
         {
-            ToolType = toolType; 
+            ToolType = toolType;
+
+            PointerPressedCanvas  = ReactiveCommand.Create<PointerHitInfo>(OnPointerPressedCanvas);
+            PointerReleasedCanvas = ReactiveCommand.Create<PointerHitInfo>(OnPointerReleasedCanvas);
         }
 
         #endregion
@@ -52,23 +56,19 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         /// <inheritdoc/>
         public virtual void OnSelect()
         {
-            PointerPressedCanvas  += OnPointerPressedCanvas;
-            PointerReleasedCanvas += OnPointerReleasedCanvas; 
+
         }
 
         /// <inheritdoc/>
         public virtual void OnDeselect()
-        {
-            PointerPressedCanvas  -= OnPointerPressedCanvas;
-            PointerReleasedCanvas -= OnPointerReleasedCanvas;
-
+        {  
             _observables.DisposeAll();
         } 
 
         /// <summary>
         /// Реакция на зажатие мыши по Canvas.
         /// </summary> 
-        public virtual void OnPointerPressedCanvas(object? sender, PointerCanvasEventArgs e)
+        public virtual void OnPointerPressedCanvas(PointerHitInfo pointerHitInfo)
         {
             
         }
@@ -76,7 +76,7 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         /// <summary>
         /// Реакция на отжатие мыши по Canvas.
         /// </summary> 
-        public virtual void OnPointerReleasedCanvas(object? sender, PointerCanvasEventArgs e)
+        public virtual void OnPointerReleasedCanvas(PointerHitInfo pointerHitInfo)
         {
 
         }

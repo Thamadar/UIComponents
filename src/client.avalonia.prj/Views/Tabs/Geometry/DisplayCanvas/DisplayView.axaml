@@ -30,7 +30,7 @@
                       <i:Interaction.Behaviors>
                         <behaviors:CanvasHitTestBehavior 
                         IsHitTestEnabled="True"
-                        CreateCommand="{Binding CreateShapeCommand}"/> 
+                        PressCanvasCommand="{Binding CurrentSelectedTool.PointerPressedCanvas}"/> 
                       </i:Interaction.Behaviors>
                     </Canvas>
                 </ItemsPanelTemplate>

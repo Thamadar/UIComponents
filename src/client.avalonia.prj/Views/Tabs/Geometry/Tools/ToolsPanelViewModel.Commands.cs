@@ -25,7 +25,8 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
                 SelectBrushToolCommand  = ReactiveCommand.Create(vm.SelectBrushTool);
                 SelectMovingToolCommand = ReactiveCommand.Create(vm.SelectMovingTool);
                 SelectFillToolCommand   = ReactiveCommand.Create(vm.SelectFillTool);
-                SelectTextToolCommand   = ReactiveCommand.Create<ShapeCreateEnum>(vm.SelectShapesTool);
+                SelectTextToolCommand   = ReactiveCommand.Create(vm.SelectTextTool);
+                SelectShapesToolCommand = ReactiveCommand.Create<ShapeCreateEnum>(vm.SelectShapesTool);
             }
         }
 
@@ -39,7 +40,7 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         /// </summary>
         public void SelectMovingTool()
         {
-
+            _toolService.SelectTool(ToolTypeEnum.Moving);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         /// </summary>
         public void SelectBrushTool()
         {
-
+            _toolService.SelectTool(ToolTypeEnum.Brush);
         }
 
         /// <summary>
@@ -55,21 +56,26 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         /// </summary>
         public void SelectFillTool()
         {
-
+            _toolService.SelectTool(ToolTypeEnum.Fill);
         }
         /// <summary>
         /// Выбрать инструмент: Текст.
         /// </summary>
         public void SelectTextTool()
         {
-
+            _toolService.SelectTool(ToolTypeEnum.Text);
         }
         /// <summary>
         /// Выбрать инструмент: Геом. фигура.
         /// </summary>
         public void SelectShapesTool(ShapeCreateEnum shapeCreateEnum)
-        {
-
+        { 
+            var shapesTool = _toolService.GetTool<ShapesTool>();  
+            if(shapesTool != null)
+            {
+                shapesTool.SelectedShapeCreate = shapeCreateEnum;
+                _toolService.SelectTool(ToolTypeEnum.Shapes);
+            }
         }
 
         /// <summary>

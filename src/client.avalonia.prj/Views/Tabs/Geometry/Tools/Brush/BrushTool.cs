@@ -13,11 +13,16 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
     public class BrushTool : BaseTool
     {
         #region Fields
-         
+
 
         #endregion
 
         #region Properties 
+
+        /// <summary>
+        /// VM-Редактор для кисточки.
+        /// </summary>
+        public BrushEditViewModel BrushEditViewModel { get; }
 
         #endregion
 
@@ -25,8 +30,10 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 
         public BrushTool()
             : base(ToolTypeEnum.Brush)
-        { 
-            //CurrentToolEditVM = ShapeCircleEditViewModel;
+        {
+            BrushEditViewModel = new BrushEditViewModel();
+
+            CurrentToolEditVM = BrushEditViewModel;
         }
 
         #endregion
@@ -47,13 +54,9 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         }
 
         /// <inheritdoc/>
-        public override void OnPointerPressedCanvas(object? sender, PointerCanvasEventArgs e)
+        public override void OnPointerPressedCanvas(PointerHitInfo pointerHitInfo)
         {
-            if(e.HitControl != null)
-            { 
 
-                base.OnPointerPressedCanvas(sender, e);
-            }
         }
 
         #endregion

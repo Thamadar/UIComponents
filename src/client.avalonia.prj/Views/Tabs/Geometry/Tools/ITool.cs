@@ -1,7 +1,7 @@
 ﻿using Lib.Avalonia.Controls.Helpers;
-using Lib.Avalonia.Helpers; 
-using System.Collections.ObjectModel; 
-using System.Windows.Input;
+using Lib.Avalonia.Helpers;
+using ReactiveUI; 
+using System.Reactive; 
 
 namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 {
@@ -37,12 +37,12 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         /// <summary>
         /// Зажатие мыши по Canvas.
         /// </summary> 
-        event EventHandler<PointerCanvasEventArgs> PointerPressedCanvas;
+        ReactiveCommand<PointerHitInfo, Unit> PointerPressedCanvas { get; }
 
         /// <summary>
         /// Отжатие мыши по Canvas.
         /// </summary> 
-        event EventHandler<PointerCanvasEventArgs> PointerReleasedCanvas; 
+        ReactiveCommand<PointerHitInfo, Unit> PointerReleasedCanvas { get; }
 
         List<IHotKey> GetToolHotKeys();
 

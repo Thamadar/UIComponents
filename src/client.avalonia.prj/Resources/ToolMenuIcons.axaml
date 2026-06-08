@@ -1,0 +1,132 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ 
+    <!--
+    Иконка лупы.
+    -->
+    <ControlTemplate
+        x:Key="MenuMagnifierIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"> 
+                <Path
+                Data=""
+                Stroke="{TemplateBinding ContentControl.Foreground}" 
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="2"/>  
+        </Viewbox>
+    </ControlTemplate> 
+    
+    <!--
+    Иконка T.
+    -->
+    <ControlTemplate
+        x:Key="MenuTextIcon"> 
+        <TextBlock 
+              Text="T"
+              VerticalAlignment="Center" HorizontalAlignment="Center"
+              Foreground="{TemplateBinding ContentControl.Foreground}"
+              FontSize="{StaticResource MediumFontSize}"
+              FontWeight="SemiBold"/>
+    </ControlTemplate> 
+    
+    <!--
+    Иконка кисточки.
+    -->
+    <ControlTemplate
+        x:Key="MenuBrushIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"> 
+            <Grid> 
+                <Path
+                Data="M4 17C4 15.3431 5.34315 14 7 14V14C8.65685 14 10 15.3431 10 17V17C10 18.6569 8.65685 20 7 20H4.54545C4.24421 20 4 19.7558 4 19.4545V18.5V17V17Z"
+                Stroke="{TemplateBinding ContentControl.Foreground}"  
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="2"/>  
+                <Path
+                Data="M8 13.7542L15.5898 5.32104C16.3563 4.46932 17.6804 4.4345 18.4906 5.24475L18.6229 5.37708L18.7552 5.5094C19.5655 6.31965 19.5307 7.64365 18.679 8.4102L10.2458 16"
+                Stroke="{TemplateBinding ContentControl.Foreground}"  
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="2"/>  
+            </Grid> 
+        </Viewbox>
+    </ControlTemplate> 
+
+    <!--
+    Иконка ведра с краской.
+    -->
+    <ControlTemplate
+        x:Key="MenuFillIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"> 
+                <Path
+                Data="M28.879,15.879L21,8l0-2.822c0-2.088-1.523-3.956-3.601-4.158C15.014,0.788,13,2.663,13,5v3l-1,1H8.5
+	C4.91,9,2,11.91,2,15.5l0,12.387c0,0.997,0.678,1.923,1.661,2.085C4.913,30.179,6,29.214,6,28V17l10.879,10.879
+	c1.172,1.172,3.071,1.172,4.243,0l7.757-7.757C30.05,18.95,30.05,17.05,28.879,15.879z M14,5c0-1.85,1.683-3.314,3.598-2.942
+	C19.022,2.335,20,3.668,20,5.118L20,7l-0.879-0.879c-1.172-1.172-3.071-1.172-4.243,0L14,7V5z M13.5,16c0.276,0,0.5-0.224,0.5-0.5
+	v-1.408c0.581,0.207,1,0.757,1,1.408c0,0.827-0.673,1.5-1.5,1.5S12,16.327,12,15.5c0-0.651,0.419-1.201,1-1.408V15.5
+	C13,15.776,13.224,16,13.5,16z M5,16v12c0,0.551-0.448,1-1,1s-1-0.449-1-1V15.5C3,12.467,5.468,10,8.5,10H11L5,16z M28.172,19.414
+	l-7.757,7.757c-0.781,0.781-2.047,0.781-2.828,0L6.414,16L13,9.414v3.636c-1.376,0.279-2.341,1.687-1.886,3.216
+	c0.235,0.789,0.891,1.423,1.686,1.639C14.481,18.362,16,17.108,16,15.5c0-1.209-0.859-2.218-2-2.45V8.414l1.586-1.586
+	c0.781-0.781,2.047-0.781,2.828,0l9.757,9.757C28.953,17.367,28.953,18.633,28.172,19.414z"
+                Fill="{TemplateBinding ContentControl.Foreground}" 
+                Stroke="{TemplateBinding ContentControl.Foreground}" 
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="1"/>  
+        </Viewbox>
+    </ControlTemplate> 
+     
+    <!--
+    Иконка стрелок во все стороны: вверх, вниз, вправо, влево.
+    -->
+    <ControlTemplate
+        x:Key="MenuMovingIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"> 
+                <Path
+                Data="M38.937,128.936L0,89.999l38.935-38.936l0.001,29.982h42.11V38.937l-29.982,0L90.001,0l38.935,38.936l-29.982,0v42.109
+	h42.109l-0.001-29.982L180,90.001l-38.936,38.935l-0.001-29.982h-42.11v42.109l29.982,0L89.999,180l-38.936-38.936l29.982,0V98.954
+	H38.937L38.937,128.936z"
+                Fill="{TemplateBinding ContentControl.Foreground}" 
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="2"/>  
+        </Viewbox>
+    </ControlTemplate> 
+
+    
+    <!--
+    Иконка прямоугольника.
+    -->
+    <ControlTemplate
+        x:Key="MenuRectIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"> 
+                <Path
+                Data="M0 0h24v24H0z"
+                Stroke="{TemplateBinding ContentControl.Foreground}" 
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="2"/>  
+        </Viewbox>
+    </ControlTemplate> 
+
+    <!--
+    Иконка окружности.
+    -->
+    <ControlTemplate
+        x:Key="MenuCircleIcon"> 
+         <Viewbox
+            ClipToBounds="False" Stretch="UniformToFill"> 
+            <Ellipse 
+                Stroke="{TemplateBinding ContentControl.Foreground}" 
+                StrokeJoin="Round"
+                StrokeLineCap="Round"
+                StrokeThickness="2"
+                Width="24" Height="24"/> 
+        </Viewbox>
+    </ControlTemplate> 
+</ResourceDictionary>

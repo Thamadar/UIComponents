@@ -3,33 +3,28 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Xaml.Interactivity;
-
-using Client.Avalonia.Services;
-using Client.Avalonia.Views.Geometry.Shapes;
-
-using Lib.Avalonia.Extensions;
+ 
+using Lib.Avalonia.Controls.Helpers; 
  
 using System.Windows.Input;
 
 namespace Client.Avalonia.Behaviors
 {
     public class CanvasHitTestBehavior : Behavior<Canvas>
-    {
-        private List<IDisposable> _disposables = new List<IDisposable>();
-
+    {  
         public static readonly StyledProperty<bool> IsHitTestEnabledProperty =
             AvaloniaProperty.Register<CanvasHitTestBehavior, bool>(nameof(IsHitTestEnabled));
 
-        public static readonly StyledProperty<ICommand?> CreateCommandProperty =
-            AvaloniaProperty.Register<CanvasHitTestBehavior, ICommand?>(nameof(CreateCommand));
+        public static readonly StyledProperty<ICommand?> PressCanvasCommandProperty =
+            AvaloniaProperty.Register<CanvasHitTestBehavior, ICommand?>(nameof(PressCanvasCommand));
 
         /// <summary>
-        /// 
+        /// Нажатие по Canvas.
         /// </summary>
-        public ICommand? CreateCommand
+        public ICommand? PressCanvasCommand
         {
-            get => GetValue(CreateCommandProperty);
-            set => SetValue(CreateCommandProperty, value);
+            get => GetValue(PressCanvasCommandProperty);
+            set => SetValue(PressCanvasCommandProperty, value);
         }
 
         public bool IsHitTestEnabled
@@ -49,8 +44,7 @@ namespace Client.Avalonia.Behaviors
         {
             base.OnDetaching();
 
-            AssociatedObject?.RemoveHandler(Canvas.PointerPressedEvent, OnCanvasPointerPressed);
-            _disposables.DisposeAll();
+            AssociatedObject?.RemoveHandler(Canvas.PointerPressedEvent, OnCanvasPointerPressed); 
         } 
 
         private void OnCanvasPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -58,40 +52,11 @@ namespace Client.Avalonia.Behaviors
             if(AssociatedObject != null && 
                IsHitTestEnabled)
             {
-                var point = e.GetPosition(AssociatedObject);
-
+                var point      = e.GetPosition(AssociatedObject); 
                 var hitElement = AssociatedObject.InputHitTest(point) as Control;
 
-                if(hitElement != null && hitElement != AssociatedObject)
-                {
-                    ShapePress(hitElement, point);
-                }
-                else
-                {
-                    CanvasPress(AssociatedObject, point);
-                }
-
-                e.Handled = true;
+                PressCanvasCommand?.Execute(new PointerHitInfo(hitElement, point));  
             } 
-        }
-
-        /// <summary>
-        /// Реакция на нажатие по полотну Canvas.
-        /// </summary> 
-        private void CanvasPress(Canvas canvas, Point point)
-        {
-            CreateCommand?.Execute(point);
-        }
-
-        /// <summary>
-        /// Реакция на нажатие по графическому элементу.
-        /// </summary> 
-        private void ShapePress(Control hitElement, Point point)
-        {
-            if(hitElement.DataContext is IShapeItem shapeItem)
-            {
-                ShapeService.Instance.SelectShapeById(shapeItem.Id);
-            }
-        }
+        } 
     }
 }

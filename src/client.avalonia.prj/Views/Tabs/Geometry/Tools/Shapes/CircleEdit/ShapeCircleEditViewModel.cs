@@ -1,4 +1,6 @@
-﻿using Avalonia.Media;
+﻿using Avalonia;
+using Avalonia.Markup.Xaml.Templates;
+using Avalonia.Media;
 using Client.Avalonia.Views.Geometry.Shapes;
 using Lib.Avalonia;
 using Lib.Avalonia.Extensions;
@@ -75,6 +77,9 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         { 
             return new CircleItem(x, y, Radius, BorderThickness, Opacity, Fill.ToSolidColorBrush(), BorderBrush.ToSolidColorBrush());
         }
+
+        /// <inheritdoc/>
+        public ControlTemplate? GetIcon() => Application.Current?.GetTemplateResource($"MenuCircleIcon");
 
         #endregion
     }

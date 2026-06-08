@@ -14,10 +14,10 @@ namespace Client.Avalonia.Services
         private static readonly Lazy<IToolService> _instance = new Lazy<IToolService>(() => new ToolService());
 
         private readonly ISourceList<ITool> _totalTools;
-        private readonly Subject<ITool?> _currentSelectedToolSubject;
+        private readonly Subject<ITool> _currentSelectedToolSubject;
 
         //private IList<IDisposable> _disposables = new List<IDisposable>();
-        private ITool? _currentSelectedTool;
+        private ITool _currentSelectedTool;
 
         #endregion
 
@@ -29,12 +29,12 @@ namespace Client.Avalonia.Services
         public static IToolService Instance => _instance.Value;
 
         /// <inheritdoc/>
-        public IObservable<ITool?> CurrentSelectedToolObservable => _currentSelectedToolSubject.AsObservable();
+        public IObservable<ITool> CurrentSelectedToolObservable => _currentSelectedToolSubject.AsObservable();
 
         /// <summary>
         /// Текущий выбранный инструмент.
         /// </summary>
-        private ITool? CurrentSelectedTool
+        private ITool CurrentSelectedTool
         {
             get => _currentSelectedTool;
             set
@@ -51,7 +51,7 @@ namespace Client.Avalonia.Services
         private ToolService()
         {
             _totalTools                 = new SourceList<ITool>(); 
-            _currentSelectedToolSubject = new Subject<ITool?>();
+            _currentSelectedToolSubject = new Subject<ITool>();
 
             InitTools();
         }
@@ -67,7 +67,20 @@ namespace Client.Avalonia.Services
         }
 
         /// <inheritdoc/>
-        public ITool? GetCurrentSelectedTool() => CurrentSelectedTool;
+        public ITool GetCurrentSelectedTool() => CurrentSelectedTool;
+
+        /// <inheritdoc/>
+        public T? GetTool<T>() 
+            where T : ITool
+        {
+            var tool = _totalTools.Items.FirstOrDefault(x => x is T); 
+            if(tool != null && tool is T toolResult)
+            {
+                return toolResult;
+            }
+
+            return default(T?);
+        }
 
         /// <inheritdoc/>
         public void SelectTool(ToolTypeEnum toolType)
@@ -76,7 +89,7 @@ namespace Client.Avalonia.Services
 
             CurrentSelectedTool?.OnDeselect();
             CurrentSelectedTool = selectedTool;
-            CurrentSelectedTool?.OnSelect();
+            CurrentSelectedTool?.OnSelect(); 
         }
 
         private void InitTools()
@@ -92,7 +105,7 @@ namespace Client.Avalonia.Services
             _totalTools.AddRange(resultTools);
         }
 
-        private ITool? CreateTool(ToolTypeEnum toolType)
+        private ITool CreateTool(ToolTypeEnum toolType)
         {
             return toolType switch
             {

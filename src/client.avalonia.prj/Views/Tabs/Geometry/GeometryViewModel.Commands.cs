@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Client.Avalonia.Views.Tabs.Geometry.Tools;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,15 @@ namespace Client.Avalonia.Views.Geometry
     public sealed partial class GeometryViewModel
     {
         public sealed class GeometryViewModelCommands
-        {
-            public ReactiveCommand<Point, Unit> CreateShapeCommand { get; }
+        { 
             public ICommand RemoveShapeCommand { get; }
 
+            public ICommand SelectShapesToolCommand { get; }
+
             public GeometryViewModelCommands(GeometryViewModel vm)
-            {
-                CreateShapeCommand = ReactiveCommand.Create<Point>(vm.CreateShape);
-                RemoveShapeCommand = ReactiveCommand.Create(vm.RemoveSelectedShape);
+            { 
+                RemoveShapeCommand      = ReactiveCommand.Create(vm.RemoveSelectedShape);
+                SelectShapesToolCommand = ReactiveCommand.Create(vm.SelectShapesTool);
             }
         }
 
@@ -28,19 +30,7 @@ namespace Client.Avalonia.Views.Geometry
 
         public GeometryViewModelCommands Commands => _commands ??= new(this);
 
-        #region Methods
-
-        /// <summary>
-        /// Создание новой геом-фигуры.
-        /// </summary> 
-        private void CreateShape(Point point)
-        {
-            //var newShape = GeometryCreateMenuViewModel.CurrentShapeCreaterVM.Create(point.X, point.Y);
-            //if(newShape != null)
-            //{ 
-            //    _shapeService.AddShape(newShape);
-            //}
-        }
+        #region Methods 
 
         /// <summary>
         /// Удаление текущей выбранной геом. фигуры.
@@ -51,8 +41,13 @@ namespace Client.Avalonia.Views.Geometry
             if(currentShape != null)
             { 
                 _shapeService.RemoveShapeById(currentShape.Id);
-            } 
+            }
         }
+
+        /// <summary>
+        /// Выбрать инструмента Shapes.
+        /// </summary>
+        private void SelectShapesTool() =>_toolService.SelectTool(ToolTypeEnum.Shapes);
 
         #endregion
     }

@@ -66,7 +66,7 @@ namespace Client.Avalonia.Views.Geometry
             Id = id; 
 
             GeometryManagementPanelViewModel = new GeometryManagementPanelViewModel();
-            DisplayViewModel                 = new DisplayViewModel(Commands.CreateShapeCommand);
+            DisplayViewModel                 = new DisplayViewModel();
             ToolsPanelViewModel              = new ToolsPanelViewModel();
              
             _toolService
@@ -76,7 +76,7 @@ namespace Client.Avalonia.Views.Geometry
 
             InitDefaultHotKeys();
 
-            _toolService.SelectTool(ToolTypeEnum.Shapes);
+            _toolService.SelectTool(ToolTypeEnum.Moving);
         }
 
         #endregion
@@ -120,6 +120,8 @@ namespace Client.Avalonia.Views.Geometry
                 new HotKey(Key.Z, GeometryManagementPanelViewModel.Commands.StepBackEditCommand, keyModifiers:KeyModifiers.Control),
                 new HotKey(Key.Y, GeometryManagementPanelViewModel.Commands.StepForwardEditCommand, keyModifiers:KeyModifiers.Control),
                 new HotKey(Key.J, GeometryManagementPanelViewModel.Commands.CloneEditCommand, keyModifiers:KeyModifiers.Control),
+
+                new HotKey(Key.U, Commands.SelectShapesToolCommand),
             };
         } 
 

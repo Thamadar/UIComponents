@@ -6,13 +6,17 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
     public class TextTool : BaseTool
     {
         #region Fields
-         
+
 
         #endregion
 
         #region Properties
-         
-         
+
+
+        /// <summary>
+        /// VM-Редактор для текста.
+        /// </summary>
+        public TextEditViewModel TextEditViewModel { get; }
 
         #endregion
 
@@ -20,8 +24,10 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 
         public TextTool()
             : base(ToolTypeEnum.Text)
-        { 
-            //CurrentToolEditVM = ShapeCircleEditViewModel;
+        {
+            TextEditViewModel = new TextEditViewModel();
+
+            CurrentToolEditVM = TextEditViewModel;
         }
 
         #endregion
@@ -42,12 +48,9 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         }
 
         /// <inheritdoc/>
-        public override void OnPointerPressedCanvas(object? sender, PointerCanvasEventArgs e)
+        public override void OnPointerPressedCanvas(PointerHitInfo pointerHitInfo)
         {
-            if(e.HitControl != null)
-            { 
-                base.OnPointerPressedCanvas(sender, e);
-            }
+
         }
 
         #endregion

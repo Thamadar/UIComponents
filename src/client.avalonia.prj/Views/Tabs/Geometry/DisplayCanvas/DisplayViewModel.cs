@@ -4,6 +4,7 @@ using Avalonia.Media;
 using Client.Avalonia.Services;
 using Client.Avalonia.Services.Interfaces;
 using Client.Avalonia.Views.Geometry.Shapes;
+using Client.Avalonia.Views.Tabs.Geometry.Tools;
 using DynamicData;
 using Lib.Avalonia;
 using Lib.Avalonia.Extensions;
@@ -20,11 +21,20 @@ namespace Client.Avalonia.Views.Geometry
          
         private ReadOnlyObservableCollection<IShapeItem> _totalShapes = new(new());
         private readonly IShapeService _shapeService;
+        private readonly IToolService _toolService;
+
         private IShapeItem? _selectedShape;
+        private ITool _currentSelectedTool;
 
         #endregion
 
         #region Properties 
+         
+        /// <summary>
+        /// Геометрические фигуры.
+        /// </summary>
+        public ReadOnlyObservableCollection<IShapeItem> TotalShapes => _totalShapes;
+        public ReactiveCommand<Point, Unit> CreateShapeCommand { get; }
 
         /// <summary>
         /// Текущая выбранная геом. фигура.
@@ -33,29 +43,24 @@ namespace Client.Avalonia.Views.Geometry
         {
             get => _selectedShape;
             set => this.RaiseAndSetIfChanged(ref _selectedShape, value);
-        }
+        } 
 
         /// <summary>
-        /// Геометрические фигуры.
+        /// Текущий выбранный инструмент (заливка, текст, перемещение, ...) .
         /// </summary>
-        public ReadOnlyObservableCollection<IShapeItem> TotalShapes => _totalShapes;
-        public ReactiveCommand<Point, Unit> CreateShapeCommand { get; }
-
+        public ITool CurrentSelectedTool
+        {
+            get => _currentSelectedTool;
+            set => this.RaiseAndSetIfChanged(ref _currentSelectedTool, value);
+        }
         #endregion
 
-        #region .ctor
-        /// <summary>
-        /// Конструктор-заглушка, дабы Designer не падал.
-        /// </summary>
+        #region .ctor 
+
         public DisplayViewModel()
-            : this(ReactiveCommand.Create<Point>((Point p) => { }))
-        {
-
-        }
-
-        public DisplayViewModel(ReactiveCommand<Point, Unit>? createShapeCommand = null)
         {
             _shapeService = ShapeService.Instance;
+            _toolService  = ToolService.Instance;
 
             _shapeService
                 .ConnectToTotalShapes() 
@@ -67,18 +72,18 @@ namespace Client.Avalonia.Views.Geometry
                 .CurrentSelectedShapeObservable 
                 .BindTo(this, x => x.SelectedShape)
                 .AddTo(_disposables);
-
-            if(!Design.IsDesignMode && createShapeCommand != null)
-            {
-                CreateShapeCommand = createShapeCommand;
-            }
+            
+            _toolService
+                .CurrentSelectedToolObservable
+                .BindTo(this, x => x.CurrentSelectedTool)
+                .AddTo(_disposables);
 
             LoadDefaultShapes();
         }
 
         #endregion
 
-        #region Methods 
+        #region Methods  
 
         /// <summary>
         /// Загрузка базовых геом. фигур (для теста).
