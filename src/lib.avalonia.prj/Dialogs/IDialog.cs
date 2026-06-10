@@ -2,6 +2,7 @@
 
 using System.Reactive;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Lib.Avalonia.Services.Dialogs;
 
@@ -30,7 +31,7 @@ public interface IDialog
 	/// <summary>
 	/// Команда закрытия диалогового окна.
 	/// </summary>
-	IReactiveCommand OutCommand { get; }
+	ICommand OutCommand { get; }
 
 	#endregion Properties
 

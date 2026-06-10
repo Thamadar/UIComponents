@@ -22,7 +22,8 @@
     </Design.DataContext>
      
     <i:Interaction.Behaviors>
-        <uibehaviors:AddWindowHotKeysBehavior HotKeys="{Binding HotKeys}"/>
+        <uibehaviors:AddWindowHotKeysBehavior HotKeys="{Binding HotKeys}"
+        IsEnabled="{Binding !#MessageBox.IsOpen}"/>
     </i:Interaction.Behaviors>
     
     <Window.Resources>  
@@ -69,12 +70,15 @@
         Grid.Column="1"
         Content="{Binding CurrentTabVM}"/>
          
-        <uic:DialogDarkControl Grid.Row="1"
+        <uic:DialogDarkControl
+        Grid.Row="1"
         Grid.ColumnSpan="10"
         IsActive="{Binding IsDialogsOpenedObserve^}"/>
 
-        <mb:MessageBoxView Grid.Row="1"
+        <mb:MessageBoxView 
+        Grid.Row="1"
         Grid.ColumnSpan="10"
+        x:Name="MessageBox"
             DataContext="{Binding DefaultDialogs.MessageBox}"
             Placement="Center" PlacementAnchor="None"
             PlacementGravity="None" IsOpen="{Binding IsOpen}"/>

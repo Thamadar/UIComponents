@@ -48,9 +48,9 @@ namespace Lib.Avalonia.Behaviors
         /// Исполнение события нажатия на клавишу. Поиск совпадений в списке горячих клавиш и их выполнение.
         /// </summary> 
         private void OnKeyDown(object? sender, KeyEventArgs e)
-        {
+        {  
             var textBox = e.Source as TextBox;
-            if(HotKeys == null || 
+            if(!IsEnabled || HotKeys == null || 
                 HotKeys.Count() == 0 ||
                 textBox != null)
                 return;

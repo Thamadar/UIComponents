@@ -2,14 +2,19 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="using:Lib.Avalonia.Controls" xmlns:conv="using:Lib.Avalonia.Converters"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:sys="using:System" xmlns:vm="using:Lib.Avalonia.Services.Dialogs.MessageBox" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:sys="using:System"
+    xmlns:vm="using:Lib.Avalonia.Services.Dialogs.MessageBox" 
     x:DataType="vm:MessageBoxViewModel"
+
     IsHidden="{Binding IsHidden}" 
     d:DesignHeight="310" d:DesignWidth="350"
     CloseCommand="{Binding OutCommand}"
     IgnoreClickOut="{Binding IgnoreClickOut}"
-    IsOpen="True" Placement="Center"
+    IsOpen="True" Placement="Center" 
+
     mc:Ignorable="d"
     x:Class="Lib.Avalonia.Services.Dialogs.MessageBox.MessageBoxView">
 
@@ -35,14 +40,14 @@
             Background="{DynamicResource MessageBoxBackground}"
             CornerRadius="{DynamicResource MessageBoxCornerRadius}">
             <Grid 
-                RowDefinitions="auto,*">
+                RowDefinitions="auto,*"
+                Focusable="True"> 
                 <ContentControl
                     Name="PART_Header"
                     Grid.Row="0" />
                 <ContentControl
                     Name="PART_Container" 
-                    Grid.Row="1"
-                    VerticalAlignment="Stretch" />
+                    Grid.Row="1" />
             </Grid>
         </Border>
 

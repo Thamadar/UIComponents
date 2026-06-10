@@ -1,5 +1,9 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Xaml.Behaviors.Interactivity"
+        xmlns:behaviors="using:Lib.Avalonia.Behaviors"
+
         xmlns:mb="using:Lib.Avalonia.Services.Dialogs.MessageBox"
         xmlns:vm="using:Lib.Avalonia.Services.Dialogs.MessageBox"
         xmlns:c="using:Lib.Avalonia.Controls" 
@@ -101,14 +105,20 @@
                             Classes="message-box-message"
                             Grid.Row="0"
                             Text="{Binding Message}" />
-
+                            
+                        <!-- При открытии MessageBox фокус ставится на данную кнопку. 
+                             Можно просто нажать Enter, чтобы активировать -->
                         <Button
                             Classes="down-message-box"  
                             Grid.Row="1"
                             Margin="32,8"
                             HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                             Content="ОК"
-                            Command="{Binding Commands.AcceptCommand}" />
+                            Command="{Binding Commands.AcceptCommand}"> 
+                            <i:Interaction.Behaviors>
+                               <behaviors:FocusElementByNameBehavior /> 
+                            </i:Interaction.Behaviors>
+                        </Button>
                     </Grid>
                 </ControlTemplate>
             </Setter>
@@ -131,11 +141,17 @@
                             VerticalAlignment="Bottom"
                             ColumnDefinitions="*,8,*"> 
                              
+                        <!-- При открытии MessageBox фокус ставится на данную кнопку. 
+                             Можно просто нажать Enter, чтобы активировать -->
                             <Button
                                 Classes="down-message-box" 
                                 Grid.Column="0"
                                 Content="ОК"
-                                Command="{Binding Commands.AcceptCommand}" />
+                                Command="{Binding Commands.AcceptCommand}" >
+                                <i:Interaction.Behaviors>
+                                   <behaviors:FocusElementByNameBehavior /> 
+                                </i:Interaction.Behaviors>
+                            </Button>
                             <Button
                                 Classes="down-message-box" 
                                 Grid.Column="2"

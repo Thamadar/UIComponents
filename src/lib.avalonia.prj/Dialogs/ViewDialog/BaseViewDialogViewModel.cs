@@ -8,6 +8,7 @@ using System;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Lib.Avalonia.Services.Dialogs.ViewDialog;
 public abstract class BaseViewDialogViewModel<P, R> : ViewModelBase, IViewDialog<P, R>, IDisposable
@@ -27,7 +28,7 @@ public abstract class BaseViewDialogViewModel<P, R> : ViewModelBase, IViewDialog
 	protected ControlTemplate? _headerIconControlTemplate;
 	protected ControlTemplate? _displayIconControlTemplate;
 
-	private IReactiveCommand _outCommand;
+	private ICommand _outCommand;
 
 	private bool _hardCloseWarning;
 	private bool _ignoreClickOut;
@@ -102,7 +103,7 @@ public abstract class BaseViewDialogViewModel<P, R> : ViewModelBase, IViewDialog
 	} 
 
 	/// <inheritdoc/>
-	public IReactiveCommand OutCommand
+	public ICommand OutCommand
 	{
 		get => _outCommand;
 		protected set => this.RaiseAndSetIfChanged(ref _outCommand, value);
@@ -180,8 +181,7 @@ public abstract class BaseViewDialogViewModel<P, R> : ViewModelBase, IViewDialog
 		if(_dialogTask.Task.IsCompleted)
 			_dialogTask = new TaskCompletionSource<R>(); 
 
-		OutCommand = ReactiveCommand.CreateFromTask(CloseCommandMethod);
-		OutCommand.AddTo(_disposables);
+		OutCommand = ReactiveCommand.CreateFromTask(CloseCommandMethod); 
 
 		parameters.Header.ToProperty(this, x => x.Header, out _header);
 		this.RaisePropertyChanged(nameof(Header));

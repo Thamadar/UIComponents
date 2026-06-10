@@ -32,6 +32,8 @@
                                 Margin="4,4"/>
                                 
                                 <!-- Контент пункта меню -->
+                                <!-- TO DO: сделать так, чтобы MenuManager 32 пикселя для иконок у всех элементов коллекции
+                                     ставил в 0, если ни один из элементов не хранил иконку. -->
                                 <Grid ColumnDefinitions="32,*,20"
                                       IsVisible="{Binding !IsSeparator, RelativeSource={RelativeSource TemplatedParent}}">
                                     
@@ -39,13 +41,14 @@
                                     <ContentControl
                                     Grid.Column="0"
                                     ClipToBounds="False"
-                                                    IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
-                                                    Content="{TemplateBinding Icon}"
-                                                    Template="{TemplateBinding Icon}"
-                                                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                                                    Width="16"
-                                                    Height="16"/>
-                                                    
+                                    IsVisible="{TemplateBinding Icon, Converter={x:Static ObjectConverters.IsNotNull}}"
+                                    Content="{TemplateBinding Icon}"
+                                    Template="{TemplateBinding Icon}"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Width="16"
+                                    Height="16"/>
+                                           
+                                    <!-- Текст + Key (горячие клавиши) -->
                                     <Grid 
                                     x:Name="PART_TextContainerGrid"
                                     Grid.Column="1"
