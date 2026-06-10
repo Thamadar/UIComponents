@@ -10,6 +10,7 @@ namespace Lib.Avalonia.Helpers
     public class MenuDataItem : ReactiveObject, IMenuDataItem
     {
         private ControlTemplate? _icon;
+        private bool? _isSelected;
 
         /// <inheritdoc/>
         public ObservableCollection<IMenuDataItem>? Childs { get; }
@@ -37,7 +38,14 @@ namespace Lib.Avalonia.Helpers
         public object? Tag { get; }
 
         /// <inheritdoc/>
-        public bool IsSeparator { get; }  
+        public bool IsSeparator { get; }
+        
+        /// <inheritdoc/>
+        public bool? IsSelected
+        {
+            get => _isSelected;
+            set => this.RaiseAndSetIfChanged(ref _isSelected, value);
+        }
 
         public MenuDataItem(
             string text = "", 

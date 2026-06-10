@@ -28,7 +28,7 @@ namespace Client.Avalonia.Views.Geometry
             public GeometryManagementPanelViewModelCommands(GeometryManagementPanelViewModel vm)
             {
                 NewFileCommand  = ReactiveCommand.Create(vm.OnNewFile);
-                OpenFileCommand = ReactiveCommand.Create(vm.OnOpenFile);
+                OpenFileCommand = ReactiveCommand.Create<string?>(vm.OnOpenFile);
                 SaveFileCommand = ReactiveCommand.Create(vm.OnSavefile);
                 CloseFileCommand = ReactiveCommand.Create(vm.OnCloseFile);
 
@@ -49,9 +49,10 @@ namespace Client.Avalonia.Views.Geometry
             await MessageHelper.OpenMessageBoxMessage("Файл", "Новый файл успешно создан. (имитация действия)");
         }
 
-        private async void OnOpenFile()
+        private async void OnOpenFile(string? fileName)
         {
-            await MessageHelper.OpenMessageBoxMessage("Файл", "Файл успешно выбран. (имитация действия)");
+            fileName = fileName == null ? "" : $"\"{fileName}\" ";
+            await MessageHelper.OpenMessageBoxMessage("Файл", $"Файл {fileName}успешно выбран. (имитация действия)");
         } 
         private async void OnCloseFile()
         {

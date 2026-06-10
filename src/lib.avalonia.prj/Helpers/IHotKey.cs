@@ -22,7 +22,8 @@ namespace Lib.Avalonia.Helpers
         public ICommand? Command { get; }
 
         /// <summary>
-        /// Параметр команды. Может быть null.
+        /// Параметр команды.
+        /// Может быть null.
         /// </summary>
         public object? CommandParameter { get; }
     } 

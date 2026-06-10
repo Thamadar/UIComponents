@@ -31,7 +31,14 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 
     public interface ITool
     {
+        /// <summary>
+        /// Тип инструмента.
+        /// </summary>
         ToolTypeEnum ToolType { get; }
+
+        /// <summary>
+        /// Текущая выбранная VM-редактирования инструмента.
+        /// </summary>
         IToolEditVM CurrentToolEditVM { get; set; }
 
         /// <summary>
@@ -44,17 +51,21 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         /// </summary> 
         ReactiveCommand<PointerHitInfo, Unit> PointerReleasedCanvas { get; }
 
-        List<IHotKey> GetToolHotKeys();
+        /// <summary>
+        /// Получить горячие клавиши инструмента.
+        /// </summary>
+        /// <returns></returns>
+        List<IHotKey> GetToolHotKeys(); 
 
         /// <summary>
         /// Реакция на "Инструмент выбран".
         /// </summary>
-        public void OnSelect();
+        void OnSelect();
 
         /// <summary>
         /// Реакция на "Инструмент больше не выбран".
         /// </summary>
-        public void OnDeselect();
+        void OnDeselect();
 
     }
 }

@@ -12,7 +12,7 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
         #region Fields
 
         protected List<IDisposable> _observables = new List<IDisposable>();
-        protected IToolEditVM _currentToolEditVM;
+        protected IToolEditVM _currentToolEditVM; 
 
         #endregion
 
@@ -35,7 +35,6 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
 
         /// <inheritdoc/>
         public ReactiveCommand<PointerHitInfo, Unit> PointerReleasedCanvas { get; } 
-
         #endregion
 
         #region Constructors

@@ -36,8 +36,10 @@
                    x:DataType="uih:IMenuDataItem">
                        <uic:CustomContextMenu  
                        Classes="tools"
+                       IsSelected="{Binding IsSelected}"
                        Items="{Binding Childs}"
                        Command="{Binding Command}"
+                       ToolTip.Tip="{Binding Text}"
                        GroupName="ToolsPanel">
                            <uic:CustomContextMenu.Content>
                                 <!-- Иконка -->

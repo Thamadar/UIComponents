@@ -1,17 +1,16 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives; 
-using Avalonia.Input; 
+using Avalonia.Input;
+using Avalonia.Data;
 using Avalonia.Metadata;
 using Avalonia.Rendering; 
 using Avalonia.VisualTree; 
 using Lib.Avalonia.Controls.Helpers;
-using Lib.Avalonia.Extensions;
 using Lib.Avalonia.Helpers;
 using ReactiveUI;
 using System.Collections.ObjectModel; 
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Windows.Input;
 
 namespace Lib.Avalonia.Controls
@@ -36,7 +35,8 @@ namespace Lib.Avalonia.Controls
             AvaloniaProperty.Register<CustomContextMenu, object?>(nameof(CommandParameter));
 
         public static readonly StyledProperty<ICommand> CloseCommandProperty =
-            AvaloniaProperty.Register<CustomMenuItem, ICommand>(nameof(CloseCommand));
+            AvaloniaProperty.Register<CustomMenuItem, ICommand>(nameof(CloseCommand),
+                defaultBindingMode: BindingMode.OneWayToSource);
          
         public static readonly StyledProperty<bool> IsDropDownOpenProperty =
             AvaloniaProperty.Register<CustomContextMenu, bool>(nameof(IsDropDownOpen), false);
@@ -44,11 +44,15 @@ namespace Lib.Avalonia.Controls
         public static readonly StyledProperty<bool> IsHoldOpenMoveModeProperty =
             AvaloniaProperty.Register<CustomContextMenu, bool>(nameof(IsHoldOpenMoveMode));
 
+        public static readonly StyledProperty<bool> IsSelectedProperty =
+            AvaloniaProperty.Register<CustomContextMenu, bool>(nameof(IsSelected));
+
         public static readonly StyledProperty<string?> GroupNameProperty =
             AvaloniaProperty.Register<CustomContextMenu, string?>(nameof(GroupName));
 
         public static readonly StyledProperty<double> MaxTextWidthProperty =
-            AvaloniaProperty.Register<CustomContextMenu, double>(nameof(MaxTextWidth));
+            AvaloniaProperty.Register<CustomContextMenu, double>(nameof(MaxTextWidth), 
+                defaultBindingMode: BindingMode.OneWayToSource);
 
         public ObservableCollection<IMenuDataItem> Items
         {
@@ -134,6 +138,17 @@ namespace Lib.Avalonia.Controls
         {
             get => GetValue(IsHoldOpenMoveModeProperty);
             set => SetValue(IsHoldOpenMoveModeProperty, value);
+        }
+
+        /// <summary>
+        /// Выбран ли данный элемент? 
+        /// Свойство необходимо для случаев, когда оно необходимо для отображения состояния элемента в стиле.
+        /// Самим CustomContextMenu это свойство не используется. По замыслу значение выставляется от испоьзуемой VM при необходимости.
+        /// </summary>
+        public bool IsSelected
+        {
+            get => GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
         }
 
         static CustomContextMenu()

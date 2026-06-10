@@ -33,6 +33,9 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
             LoadToolsMenuItems();
         }
 
+        /// <summary>
+        /// Реакция на выбранный инструмент.
+        /// </summary> 
         private void OnSelectedTool(ITool selectedTool)
         {
             var selectedType = selectedTool.ToolType;
@@ -41,51 +44,62 @@ namespace Client.Avalonia.Views.Tabs.Geometry.Tools
             if(selectedMenu != null)
             {
                 selectedMenu.SetIcon(selectedTool.CurrentToolEditVM.GetIcon());
+                ToolMenuItems.SetSelectedStateToMenu(selectedMenu);
             }
-        }
+        } 
 
+        /// <summary>
+        /// Инициализация меню инструментов.
+        /// </summary>
         private void LoadToolsMenuItems()
-        {
-            var movingTool = new MenuDataItem(
-                icon: Application.Current?.GetTemplateResource("MenuMovingIcon"),
-                tag: ToolTypeEnum.Moving,
-                command: Commands.SelectMovingToolCommand);
+        {  
+            var movingTool = MenuDataItemBuilder
+                .Create("Перемещение")
+                .WithIcon("MenuMovingIcon")
+                .WithCommand(Commands.SelectMovingToolCommand) 
+                .WithTag(ToolTypeEnum.Moving)
+                .Build();
 
-            var brushTool = new MenuDataItem(
-                icon: Application.Current?.GetTemplateResource("MenuBrushIcon"),
-                tag: ToolTypeEnum.Brush,
-                command: Commands.SelectBrushToolCommand);
+            var brushTool = MenuDataItemBuilder
+                .Create("Кисть")
+                .WithIcon("MenuBrushIcon")
+                .WithCommand(Commands.SelectBrushToolCommand)
+                .WithTag(ToolTypeEnum.Brush)
+                .Build();
 
-            var fillTool = new MenuDataItem(
-                icon: Application.Current?.GetTemplateResource("MenuFillIcon"),
-                tag: ToolTypeEnum.Fill,
-                command: Commands.SelectFillToolCommand);
+            var fillTool = MenuDataItemBuilder
+                .Create("Заливка")
+                .WithIcon("MenuFillIcon")
+                .WithCommand(Commands.SelectFillToolCommand)
+                .WithTag(ToolTypeEnum.Fill)
+                .Build();
 
-            var textTool = new MenuDataItem(
-                icon: Application.Current?.GetTemplateResource("MenuTextIcon"),
-                tag: ToolTypeEnum.Text,
-                command: Commands.SelectTextToolCommand); 
+            var textTool = MenuDataItemBuilder
+                .Create("Текст")
+                .WithIcon("MenuTextIcon")
+                .WithCommand(Commands.SelectTextToolCommand)
+                .WithTag(ToolTypeEnum.Text)
+                .Build(); 
 
-            var shapesToolChilds = new List<IMenuDataItem>()
-            {
-                new MenuDataItem(
-                text: "Инструмент \"Прямоугольник\"",
-                icon: Application.Current?.GetTemplateResource("MenuRectIcon"),
-                command: Commands.SelectShapesToolCommand,
-                commandParameter: ShapeCreateEnum.Rect,
-                key: "U"),
-                new MenuDataItem(
-                text: "Инструмент \"Окружность\"",
-                icon: Application.Current?.GetTemplateResource("MenuCircleIcon"),
-                command: Commands.SelectShapesToolCommand,
-                commandParameter: ShapeCreateEnum.Circle,
-                key: "U"),
-            };
-
-            var shapesTool = new MenuDataItem(
-                icon: Application.Current?.GetTemplateResource("MenuRectIcon"),
-                tag: ToolTypeEnum.Shapes,
-                childs: shapesToolChilds);
+            var shapesTool = MenuDataItemBuilder
+                .Create("Геометрические фигура")
+                .WithIcon("MenuRectIcon") 
+                .WithTag(ToolTypeEnum.Shapes)
+                .AddChild(MenuDataItemBuilder
+                    .Create("Инструмент \"Прямоугольник\"")
+                    .WithIcon("MenuRectIcon")
+                    .WithCommand(Commands.SelectShapesToolCommand)
+                    .WithCommandParameter(ShapeCreateEnum.Rect) 
+                    .WithKey("U")
+                    .Build())
+                .AddChild(MenuDataItemBuilder
+                    .Create("Инструмент \"Окружность\"")
+                    .WithIcon("MenuCircleIcon")
+                    .WithCommand(Commands.SelectShapesToolCommand)
+                    .WithCommandParameter(ShapeCreateEnum.Circle)
+                    .WithKey("U")
+                    .Build())
+                .Build(); 
 
             ToolMenuItems.Add(movingTool);
             ToolMenuItems.Add(brushTool);
